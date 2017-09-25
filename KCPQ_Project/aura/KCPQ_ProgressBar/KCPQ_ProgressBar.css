@@ -1,0 +1,47 @@
+.THIS .half {
+    font-size:13px;
+    min-width:2rem !important;
+ }
+
+.THIS .container {
+	padding-bottom : 1% !important;    
+}
+
+@media only screen and (max-width: 500px) {
+   .THIS .half {
+        font-size:9px;
+        min-width:2rem !important;
+        /*font-size:0.82em;*/
+        min-height:1.98rem !important;
+   }
+    
+    .THIS .processfont {
+        line-height:1.0em !important;
+        padding:0.70em !important;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+   .THIS .half {
+        font-size:6.9px;
+        min-width:1rem !important;
+        /*font-size:0.82em;*/
+        /*min-height:1.98rem !important;*/
+        min-height:1rem !important;
+   }
+    
+    .THIS .processfont {
+        line-height:1.0em !important;
+        padding:0.70em !important;
+    }
+}
+
+@media (max-width: 47.9375em){
+	.THIS .slds-is-complete {
+    	display: none;
+    }
+    
+    .THIS .slds-is-incomplete {
+    	display: none;
+    }
+}

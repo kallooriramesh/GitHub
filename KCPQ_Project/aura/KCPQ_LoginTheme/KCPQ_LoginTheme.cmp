@@ -1,0 +1,47 @@
+<aura:component implements="forceCommunity:layout,forceCommunity:themeLayout" description="KCPQ Login Theme" access="global">
+    
+    <aura:attribute name="HeaderComponent" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="SideBarComponent1" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="Content" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="FooterComponent" type="Aura.Component[]" required="false"></aura:attribute>
+    
+    <html lang="en">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <!-- Meta, title, CSS, favicons, etc. -->
+            <meta charset="utf-8"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            
+            <title>Login</title>
+        </head>
+        <body>
+            <div>
+                <article class="slds-card">
+                    <div class="slds-card__body slds-card__body_inner backBodyCSS slds-grid_pull-padded">
+                        <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                            <li class="slds-size_1-of-1 slds-medium-size_1-of-1">
+                                {!v.HeaderComponent}
+                            </li>
+                        </ul>
+                        <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                            <li class="slds-size_1-of-1 slds-medium-size_1-of-2">
+                                {!v.SideBarComponent1}
+                            </li>
+                            <li class="slds-size_1-of-1 slds-medium-size_1-of-2">
+                                <div class="SideBarComponent2CSS">
+                                    {!v.Content}
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                            <li class="slds-size_1-of-1 slds-medium-size_1-of-1">
+                                {!v.FooterComponent}
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </body>
+    </html>
+</aura:component>

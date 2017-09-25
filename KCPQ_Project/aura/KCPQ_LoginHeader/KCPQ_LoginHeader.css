@@ -1,0 +1,17 @@
+.THIS .newHeader{
+    /*background-color: #00ead0;*/
+    /*background-color: #2a3f54;*/
+    height: 75px;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.THIS .companyLogoCss{
+    max-width: 160px;
+    min-width: 140px;
+}
+
+.THIS .headerBannerCss{
+    width:100% !important;
+    height: 500px !important;
+}

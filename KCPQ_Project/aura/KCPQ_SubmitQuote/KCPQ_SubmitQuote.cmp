@@ -1,0 +1,23 @@
+<aura:component controller="KCPQ_SubmitQuoteCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="quoteId" type="Id"/>
+    <aura:attribute name="pathprefixURL" type="String"/>
+    <aura:attribute name="printQuoteURL" type="String" default="{!$Label.c.KCPQ_PrintQuoteURL}" />
+    
+    <div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Successfull!!!</h3>
+            </div>
+        </div>
+        <h2>{!$Label.c.KCPQ_SubmitQuote_SuccessMessage}</h2>
+        <br/><br/>
+        <center>
+            <a href="{!v.pathprefixURL + '/'}" class="btn btn-primary">Home</a>
+            <button class="btn btn-success" type="button" onclick="{!c.doPrintQuote}">Print Quote</button>
+        </center>
+    </div>
+    
+</aura:component>

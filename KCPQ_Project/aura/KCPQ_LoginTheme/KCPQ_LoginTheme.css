@@ -1,0 +1,39 @@
+.THIS .slds-card{
+    padding: 0;
+    background: rgb(255, 255, 255);
+    border: 1px solid white;
+    border-radius: .25rem;
+    background-clip: padding-box;
+}
+
+.THIS .slds-card__body{
+	margin-bottom: 0rem !important;
+}
+
+.THIS .inverseTextColor {
+    color: #3558d6;
+}
+
+.THIS .SideBarComponent1CSS{
+    float: left;
+    width: 50%;
+    background: #2f3132;
+    color: #ffffff;
+    padding: 30px 30px;
+}
+
+.THIS .SideBarComponent2CSS{
+    float: right;
+    width: 100%;
+    background: #f4f4f4;
+    color: black;
+    padding: 36px 60px;
+    height: 320px;
+}
+
+.THIS .backBodyCSS{
+    position: relative;
+    z-index: 1;
+    /*background-color: #4d4e53;*/
+    background-color: #2a3f54;
+}

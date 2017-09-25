@@ -1,0 +1,98 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="KCPQ_FieldSetTableNew">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="sObjectAPIName" type="String" required="true" default="Resource__kav"/>
+    <aura:attribute name="headerFieldSetName" type="String" required="true" default="KCPQ_Article_Header"/>
+    <aura:attribute name="FieldSetAPIName" type="String" required="true" default="KCPQ_Record_View"/>
+    <aura:attribute name="fieldlist" type="List"/>
+    <aura:attribute name="sObjWrapperlist" type="List"/>
+    <aura:attribute name="publishStatus" type="String" required="true" default="Online"/>
+    <aura:attribute name="Source" type="String" required="true" default="Online"/>
+    <aura:attribute name="recordDetails" type="List"/>
+    <aura:attribute name="headderDetails" type="List"/>
+    <aura:attribute name="fieldTable" type="String"/>
+    <aura:attribute name="type" type="String"/>
+    
+    <!--ERROR Parameters-->
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <!-- ERROR Parameters END-->
+    
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    
+    <div>
+        <aura:if isTrue="{!v.startLoading}" >
+            <c:KCPQ_LoadingFunctionalityComp />
+        </aura:if>
+        <aura:if isTrue="{!and(v.messageTitle != '', v.messageText != '')}" >
+            <c:KCPQ_DisplayToastMessage messageTitle="{!v.messageTitle}"
+                                        messageText="{!v.messageText}"/>
+        </aura:if>
+        
+        
+        <aura:if isTrue="{!!v.startLoading}" >
+            <aura:iteration items="{!v.headderDetails}" var="obj" indexVar="index">
+                <aura:if isTrue="{!if(index == 0 , true, false)}">
+                    <div class="slds-page-header">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-has-flexi-truncate">
+                                <div class="slds-media slds-no-space slds-grow">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-user">
+                                            <lightning:icon iconName="standard:article" size="large"/>
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="slds-media__body">
+                                        <p style="font-size:14px;font-weight: bold;">{!obj.fLabel}</p>
+                                        <h1 class="slds-page-header__title slds-m-right_small slds-align-middle" title="{!obj.fvalue}">{!obj.fValue}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </aura:if>
+            </aura:iteration>
+            <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded slds-grid slds-page-header__detail-row">
+                
+                <aura:iteration items="{!v.headderDetails}" var="obj" indexVar="index">
+                    
+                    <aura:if isTrue="{!if(index != 0 , true, false)}">
+                        <li class="slds-p-horizontal_large slds-size_1-of-1 slds-page-header__detail-block">
+                            <p class="slds-section__title slds-theme_shade" style="font-size:14px;background-color:white;font-weight: bold;">{!obj.fLabel}</p>
+                            <p class="slds-section__title slds-theme_shade" style="font-size:14px;background-color:white;">{!obj.fValue}</p>
+                        </li>
+                    </aura:if>   
+                </aura:iteration>
+            </ul>
+            <div class="slds-tabs_default">
+                <ul class="slds-tabs_default__nav" role="tablist">
+                    <li class="slds-tabs_default__item slds-is-active" title="Details" role="presentation">
+                        <a class="slds-section__title slds-theme_shade" style="font-size:14px;background-color:white;font-weight: bold;" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">
+                            Details
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <aura:iteration items="{!v.recordDetails}" var="obj" indexVar="index">
+                
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-p-horizontal_small" style="font-weight: bold;padding-left: 0px;" title="{!obj.fLabel}">{!obj.fLabel}</span>
+                    </h3>
+                    
+                </div> 
+                <div aria-hidden="false" style="font-size:14px;background-color:white;">
+                        <aura:unescapedHtml value="{!obj.fValue}" />
+                      
+                    </div>
+            </aura:iteration>
+            <center>
+                <button class="slds-button slds-button_neutral" onclick="{!c.gotoURL}">Back</button>
+            </center>
+        </aura:if>
+    </div>
+</aura:component>

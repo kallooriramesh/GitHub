@@ -1,0 +1,47 @@
+<aura:component controller="KCPQ_QuoteDetailCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="mainProduct" type="Product2" default="{ 'sobjectType': 'Product2' }"/>
+    <aura:attribute name="currencySymbol" type="String" />
+    <aura:attribute name="mainProductPrice" type="Decimal" />
+    <aura:attribute name="mainProductNetPrice" type="Decimal" />
+    <aura:attribute name="productWrapper" type="KCPQ_ProductWrapperCtrl"/>
+    <aura:attribute name="featureNames" type="String[]"/>
+    <aura:attribute name="featureIds" type="String[]"/>
+    <aura:attribute name="colorNames" type="String[]"/>
+    <aura:attribute name="iscolorNamesGet" type="Boolean" default="false"/>
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <aura:attribute name="progressStageOrder" type="Integer" />
+    <aura:attribute name="noProductFound" type="Boolean" default="false" />
+    <aura:attribute name="isSubmitButtonDisabled" type="Boolean" default="false" />
+    
+    <div>
+        <aura:if isTrue="{!v.startLoading}" >
+            <c:KCPQ_LoadingFunctionalityComp />
+        </aura:if>
+        
+        <aura:if isTrue="{!v.noProductFound}">
+        	<h2>No Quote Line Items</h2>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.iscolorNamesGet}" >
+            <c:KCPQ_BuildWizard startLoading="{!v.startLoading}" 
+                                quoteId="{!v.recordId}" 
+                                mainProduct="{!v.mainProduct}"
+                                productWrapper="{!v.productWrapper}"
+                                featureNames="{!v.featureNames}"
+                                featureIds="{!v.featureIds}"
+                                currencySymbol="{!v.currencySymbol}"
+                                mainProductPrice="{!v.mainProductPrice}"
+                                colorNames="{!v.colorNames}"
+                                messageTitle="{!v.messageTitle}"
+                                messageText="{!v.messageText}"
+                                mainProductNetPrice="{!v.mainProductNetPrice}"
+                                progressStageOrder="{!v.progressStageOrder}"
+                                isSubmitButtonDisabled="{!v.isSubmitButtonDisabled}"/>
+        </aura:if>
+    </div>
+</aura:component>

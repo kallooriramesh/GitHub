@@ -1,0 +1,19 @@
+<aura:component controller="KCPQ_LoginCtrl" implements="forceCommunity:availableForAllPageTypes">
+	
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="KCPQLoginHeaderCompanyLogo" type="String" default="{!$Label.c.KCPQLogin_HeaderCompanyLogo}" />
+    <aura:attribute name="KCPQLoginHeaderBannerImg" type="String" default="{!$Label.c.KCPQLogin_HeaderBannerImg}" />
+    <aura:attribute name="loginHeaderCompanyLogoBackground" type="String" default="{!$Label.c.KCPQLoginHeaderBackgroundColor}" />
+    <aura:attribute name="baseURL" type="String"/>
+    
+    <div>
+        <ul>
+            <li class="slds-size_1-of-1 slds-medium-size_1-of-1">
+                <div class="newHeader" style="{! 'background-color:' + v.loginHeaderCompanyLogoBackground}">
+                    <img class="companyLogoCss" src="{! v.baseURL + v.KCPQLoginHeaderCompanyLogo}" />
+                </div>
+                <img class="headerBannerCss" src="{! v.baseURL + v.KCPQLoginHeaderBannerImg}"/>
+            </li>
+        </ul>
+    </div>
+</aura:component>

@@ -1,0 +1,26 @@
+.THIS .uiMessage.error {
+    background: #a01c1c;
+    color: white;
+    font-weight: normal;
+}
+
+.THIS .uiMessage.confirm{
+    background: #155a15;
+    color: white;
+    font-weight: normal;
+}
+
+.THIS .uiMessage.info {
+    background: #8088b3;
+    color: white;
+    font-weight: normal;
+}
+
+.THIS .msgCloseBlockCSS{
+    float:right;
+}
+
+.THIS .msgBlockCSS{
+	float:left;
+    text-align: left;    
+}

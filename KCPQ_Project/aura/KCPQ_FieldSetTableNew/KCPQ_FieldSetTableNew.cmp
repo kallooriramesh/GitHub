@@ -1,0 +1,321 @@
+<aura:component controller="KCPQ_FieldSetTableNew" implements="forceCommunity:availableForAllPageTypes" access="global"  >
+    
+    <!-- Design parameters START-->
+    <aura:attribute name="sObjectAPIName" type="String" required="true" default="Lead"/>
+    <aura:attribute name="FieldSetAPIName" type="String" required="true" default="KCPQ_LatestLeadsHome"/>
+    <aura:attribute name="limit" type="String" required="true" default="Latest 5"/>
+    <aura:attribute name="orderByField" type="String" required="true" Default="CreatedDate"/>
+    <aura:attribute name="orderBy" type="String" required="true" Default="DESC"/>
+    <aura:attribute name="headder" type="String" required="true" Default="Latest Leads from Corporate"/>
+    <aura:attribute name="headderIcon" type="String" required="true" Default="lead"/>
+    <!-- Design parameters END-->
+    
+    <aura:attribute name="displayLimit" type="Integer"/>
+    <aura:attribute name="totalRecordsCount" type="Integer"/>
+    <aura:attribute name="fieldlist" type="List"/>
+    <aura:attribute name="sObjWrapperlist" type="List"/>
+    <aura:attribute name="sObjWrapperTotallist" type="List"/>
+    <aura:attribute name="pagesCountTable" type="String[]" />
+    <aura:attribute name="selectedPageNumber" type="Integer" default="1"/>
+    <aura:attribute name="startCount" type="Integer" default="1"/>
+    <aura:attribute name="endCount" type="Integer" default="2"/>
+    <aura:attribute name="totalPages" type="Integer" default="1"/>
+    
+    <!--ERROR Parameters-->
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <!-- ERROR Parameters END-->
+    
+    
+    <!-- Style Elements-->
+    
+    <aura:attribute name="lastStyle" type="String" default=""/>
+    <aura:attribute name="firstStyle" type="String" default="pointer-events:none;opacity:0.5;"/>
+    <!--END Style Elements-->
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    
+    <aura:attribute name="pathprefixURL" type="String"/>
+    
+    <aura:if isTrue="{!and(v.messageTitle != '', v.messageText != '')}" >
+        <c:KCPQ_DisplayToastMessage messageTitle="{!v.messageTitle}"
+                                    messageText="{!v.messageText}"/>
+    </aura:if>
+    <aura:if isTrue="{!if(or($Browser.isIPad,or($Browser.formFactor == 'DESKTOP',$Browser.formFactor == 'TABLET ')) , true, false)}">
+        
+        <article class="slds-card">
+            
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="{!'standard:'+v.headderIcon}" size="small"/>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2>
+                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                                <span class="slds-text-heading--medium">
+                                    
+                                    {!v.headder} ({!v.totalRecordsCount})
+                                </span>
+                            </a>
+                        </h2>
+                    </div>
+                </header>
+                <aura:if isTrue="{!if(and(v.totalRecordsCount>5,v.limit=='All'),true,false)}">   
+                    <div>
+                        
+                        <ui:inputSelect multiple="false" value="{!v.displayLimit}" label="Show Entries" change="{!c.displaySelectedEntities}">
+                            <ui:inputSelectOption text="5" label="5"/>
+                            <ui:inputSelectOption text="10" label="10"/>
+                            <ui:inputSelectOption text="25" label="25"/>
+                            <ui:inputSelectOption text="50" label="50"/>
+                            <ui:inputSelectOption text="100" label="100"/>
+                        </ui:inputSelect>
+                        
+                    </div>
+                </aura:if>
+            </div>
+            
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <aura:iteration items="{!v.fieldlist}" var="f">
+                            <aura:if isTrue="{!if(f.fAPIName != 'Id', true, false)}">
+                                <th scope="col">
+                                    
+                                    <div class="slds-truncate" title="{!f.fLabel}">
+                                        <a id="{!f.fAPIName}" onclick="{!c.doSort}" style="font-weight:bold;">
+                                            {!f.fLabel}
+                                        </a>
+                                        <aura:if isTrue="{!if(and(v.orderByField == f.fAPIName,v.orderBy == 'ASC'),'true', 'false')}">
+                                            <lightning:icon iconName="utility:arrowdown" size="xx-small"/>
+                                        </aura:if>
+                                        <aura:if isTrue="{!if(and(v.orderByField == f.fAPIName,v.orderBy == 'DESC'),'true', 'false')}">
+                                            <lightning:icon iconName="utility:arrowup" size="xx-small"/>
+                                        </aura:if>
+                                    </div>
+                                    
+                                </th>
+                            </aura:if>
+                        </aura:iteration>
+                        <aura:if isTrue="{!if(v.sObjectAPIName=='Lead','true','false')}">
+                            <th scope="col">
+                                <div class="slds-truncate" title="ACCEPT" style="font-weight:bold;">ACCEPT</div>
+                            </th>
+                        </aura:if>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <aura:iteration items="{!v.sObjWrapperlist}" var="obj">
+                        <tr>
+                            
+                            <aura:iteration items="{!obj}" var="obj2" indexVar="index">
+                                <aura:if isTrue="{!if(obj2.fDetails.type != 'id',true,false)}">
+                                    <th scope="col">
+                                        
+                                        <div class="slds-truncate" >
+                                            <a href="{!if(v.sObjectAPIName=='Lead', v.pathprefixURL + '/detail/'+obj2.rid,v.pathprefixURL + '/quote/'+obj2.rid)}">
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'string' || obj2.fDetails.type == 'picklist' || obj2.fDetails.type == 'phone' || obj2.fDetails.type == 'email' || obj2.fDetails.type == 'url'}">
+                                                    <ui:outputText value="{!obj2.fvalue}" />
+                                                </aura:if>
+                                                
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'datetime'}">
+                                                    <ui:outputDateTime value="{!obj2.fvalue}" />
+                                                </aura:if>
+                                                
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'int'}">
+                                                    <ui:outputNumber value="{!obj2.fvalue}" format=".00"/>
+                                                </aura:if>
+                                                
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'currency'}">
+                                                    <ui:outputCurrency value="{!obj2.fvalue}" format="$#,###.00"/>
+                                                </aura:if>
+                                                
+                                            </a>
+                                            <aura:if isTrue="{!if(and(v.sObjectAPIName=='Lead',obj2.fDetails=='Id'),'true','false')}">
+                                                
+                                                <button class="slds-button slds-button--success" id="{!obj2.fvalue}" onclick="{!c.acceptLead}">Accept</button>
+                                                
+                                            </aura:if>
+                                            
+                                        </div>
+                                        
+                                    </th>
+                                </aura:if>
+                            </aura:iteration>
+                            
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+            
+            <aura:if isTrue="{!if(and(v.totalRecordsCount>5,v.limit=='Latest 5'),true,false)}">   
+                <div class="slds-card__footer">
+                    <aura:if isTrue="{!if(v.sObjectAPIName=='SBQQ__Quote__c',true,false)}">
+                        <a href="{!v.pathprefixURL + '/all-quotes'}">View All <span class="slds-assistive-text">entity type</span></a>
+                    </aura:if>
+                    <aura:if isTrue="{!if(v.sObjectAPIName=='Lead',true,false)}">
+                        <a href="{!v.pathprefixURL + '/all-leads'}">View All <span class="slds-assistive-text">entity type</span></a>
+                    </aura:if>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!if(and(v.totalRecordsCount>5,v.limit=='All'),true,false)}">  
+                <table>
+                    <tr>
+                        <td style="text-align: left;">
+                            Showing {!v.startCount} to {!v.endCount} of {!v.totalRecordsCount} entries
+                        </td>
+                        <td style="text-align: right;width:19%;">
+                            <ul class="pagination">
+                                
+                                <li style="{!v.firstStyle}">
+                                    <a onclick="{!c.nextPage}" id='firstpage'>First</a>
+                                </li>
+                                
+                                <li style="{!v.firstStyle}">
+                                    <a onclick="{!c.nextPage}" id='previouspage'>Prev</a>
+                                </li>
+                                
+                                <li style="{!v.lastStyle}">
+                                    <a onclick="{!c.nextPage}" id='nextpage'>Next</a>
+                                </li>
+                                
+                                
+                                <li style="{!v.lastStyle}">
+                                    <a onclick="{!c.nextPage}" id='lastpage'>Last</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+                
+            </aura:if>
+            
+        </article>
+    </aura:if>
+    <aura:if isTrue="{!$Browser.isPhone}">
+        
+        <table class="slds-table slds-table_bordered slds-max-medium-table_stacked">
+            <tr class="slds-hint-parent">
+                
+                <td >
+                    
+                    <h2>
+                        <aura:if isTrue="{!if(and(v.totalRecordsCount>5,v.limit=='All'),true,false)}">  
+                            <div style="width:50%;">
+                                {!v.headder} ({!v.totalRecordsCount})
+                                <ui:inputSelect multiple="false" value="{!v.displayLimit}"  change="{!c.displaySelectedEntities}">
+                                    <ui:inputSelectOption text="5" label="5"/>
+                                    <ui:inputSelectOption text="10" label="10"/>
+                                    <ui:inputSelectOption text="25" label="25"/>
+                                    <ui:inputSelectOption text="50" label="50"/>
+                                    <ui:inputSelectOption text="100" label="100"/>
+                                </ui:inputSelect>
+                            </div>
+                        </aura:if>
+                    </h2>
+                    <div class="clearfix"></div>
+                    
+                    
+                    
+                </td>
+            </tr>
+            <tbody>
+                
+                
+                <aura:if isTrue="{!if(v.totalRecordsCount>0 ,true, false)}">
+                    <aura:iteration items="{!v.sObjWrapperlist}" var="obj">
+                        <tr class="slds-hint-parent">
+                            <aura:iteration items="{!obj}" var="obj2" indexVar="index">
+                                <aura:if isTrue="{!if(obj2.fDetails.type != 'id',true,false)}">
+                                    <th scope="row" data-label="{!obj2.fDetails.label}">
+                                        <div class="slds-truncate" title="{!obj2.fDetails.label}">
+                                            <a href="{!if(v.sObjectAPIName=='Lead', v.pathprefixURL + '/detail/'+obj2.rid,v.pathprefixURL + '/quote/'+obj2.rid)}">
+                                                
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'string' || obj2.fDetails.type == 'picklist'}">
+                                                    <ui:outputText value="{!obj2.fvalue}" />
+                                                </aura:if>
+                                                
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'datetime'}">
+                                                    <ui:outputDateTime value="{!obj2.fvalue}" />
+                                                </aura:if>
+                                                
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'int'}">
+                                                    <ui:outputNumber value="{!obj2.fvalue}" format=".00"/>
+                                                </aura:if>
+                                                
+                                                <aura:if isTrue="{!obj2.fDetails.type == 'currency'}">
+                                                    <ui:outputCurrency value="{!obj2.fvalue}" format="$#,###.00"/>
+                                                </aura:if>
+                                                
+                                            </a>
+                                            <aura:if isTrue="{!if(and(v.sObjectAPIName=='Lead',obj2.fDetails=='Id'),'true','false')}">
+                                                
+                                                <button class="slds-button slds-button--success" id="{!obj2.fvalue}" onclick="{!c.acceptLead}">Accept</button>
+                                                
+                                            </aura:if>
+                                            
+                                        </div>
+                                    </th>
+                                    
+                                </aura:if>
+                            </aura:iteration>
+                            
+                        </tr>
+                    </aura:iteration>
+                    <tr>
+                        <td>
+                            <aura:if isTrue="{!if(and(v.totalRecordsCount>5,v.limit=='Latest 5'),true,false)}">   
+                                <div class="slds-card__footer">
+                                    <aura:if isTrue="{!if(v.sObjectAPIName=='SBQQ__Quote__c',true,false)}">
+                                        <a href="{!v.pathprefixURL + '/all-quotes'}">View All <span class="slds-assistive-text">entity type</span></a>
+                                    </aura:if>
+                                    <aura:if isTrue="{!if(v.sObjectAPIName=='Lead',true,false)}">
+                                        <a href="{!v.pathprefixURL + '/all-leads'}">View All <span class="slds-assistive-text">entity type</span></a>
+                                    </aura:if>
+                                </div>
+                            </aura:if>
+                        </td>
+                    </tr>
+                </aura:if>
+            </tbody>
+        </table>
+        <aura:if isTrue="{!if(and(v.totalRecordsCount>5,v.limit=='All'),true,false)}">  
+            <table>
+                <tr>
+                    <td style="text-align: left;">
+                        Showing {!v.startCount} to {!v.endCount} of {!v.totalRecordsCount} entries
+                    </td>
+                </tr>
+                <tr >
+                    <td style="text-align: right;">
+                        <ul class="pagination">
+                            
+                            <li style="{!v.firstStyle}">
+                                <a onclick="{!c.nextPage}" id='firstpage'>First</a>
+                            </li>
+                            
+                            <li style="{!v.firstStyle}">
+                                <a onclick="{!c.nextPage}" id='previouspage'>Prev</a>
+                            </li>
+                            
+                            <li style="{!v.lastStyle}">
+                                <a onclick="{!c.nextPage}" id='nextpage'>Next</a>
+                            </li>
+                            
+                            
+                            <li style="{!v.lastStyle}">
+                                <a onclick="{!c.nextPage}" id='lastpage'>Last</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            
+        </aura:if>
+    </aura:if>
+</aura:component>

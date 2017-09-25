@@ -1,0 +1,56 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,forceCommunity:themeLayout" access="global" controller="KCPQ_FAQCtrl" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <aura:attribute name="activeTabclass" type="String" default="slds-tabs_scoped__item slds-is-active" />
+    <aura:attribute name="inactiveTabclass" type="String" default="slds-tabs_scoped__item" />
+    <aura:attribute name="activeDataclass" type="String" default="slds-tabs_scoped__content slds-show" />
+    <aura:attribute name="inactiveDataclass" type="String" default="slds-tabs_scoped__content slds-hide" />
+    <aura:attribute name="selectedTab" type="String" default="tab1" />
+    <aura:attribute name="siteName" type="String" default="" />
+    <aura:attribute name="isResourceView" type="Boolean" default="false" />
+    <aura:attribute name="sObjectAPIName" type="String"/>
+    
+    <div class="slds-tabs_default__content slds-show">
+        
+        <div class="slds-tabs_scoped">
+            <ul class="slds-tabs_scoped__nav" role="tablist">
+                <li  class="{!if(v.selectedTab == 'tab1',v.activeTabclass,v.inactiveTabclass)}" title="Item One" role="presentation" >
+                    <a onclick="{!c.setSeletedTab}" style="font-size: 18px;font-weight: 400;" class="slds-tabs_scoped__link" href="javascript:void(0);" role="tab" tabindex="0" 
+                       aria-selected="true" aria-controls="tab-scoped-1" id="tab1" >
+                        Media
+                    </a>
+                </li>
+                
+                <li class="{!if(v.selectedTab == 'tab3',v.activeTabclass,v.inactiveTabclass)}" title="Item Two" role="presentation" >
+                    <a onclick="{!c.setSeletedTab}" style="font-size: 18px;font-weight: 400;" class="slds-tabs_scoped__link" href="javascript:void(0);"  role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-scoped-2" id="tab3">
+                        Resources
+                    </a>
+                </li>
+                <li class="{!if(v.selectedTab == 'tab4',v.activeTabclass,v.inactiveTabclass)}" title="Item Two" role="presentation" id="tab4">
+                    <a onclick="{!c.setSeletedTab}" style="font-size: 18px;font-weight: 400;" class="slds-tabs_scoped__link" href="javascript:void(0);"  role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-scoped-2" id="tab4">
+                        FAQ
+                    </a>
+                </li>
+            </ul>
+            
+            <div id="tab-scoped-1"  role="tabpanel" aria-labelledby="tab-scoped-1__item">
+                <div id="content_media_tab1" class="{!if(v.selectedTab == 'tab1',v.activeDataclass,v.inactiveDataclass)}">
+                    <c:KCPQ_MediaResources siteName="{!v.siteName}"/>
+                </div>
+            </div>
+            
+            <div id="tab-scoped-3" class="{!if(v.selectedTab == 'tab3',v.activeDataclass,v.inactiveDataclass)}" role="tabpanel" aria-labelledby="tab-scoped-3__item">
+                <c:KCPQ_Resources siteName="{!v.siteName}"/>
+                
+            </div>
+            <div id="tab-scoped-4" class="{!if(v.selectedTab == 'tab4',v.activeDataclass,v.inactiveDataclass)}" role="tabpanel" aria-labelledby="tab-scoped-3__item">
+                <c:KCPQ_FAQS siteName="{!v.siteName}"/>
+            </div>
+            
+        </div>
+        
+        <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">Item Two Content</div>
+        <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">Item Three Content</div>
+        
+    </div>
+    
+</aura:component>

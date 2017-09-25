@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>KCPQLoginFooterLinks_HTMLContent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginFooterLinks HTMLContent</shortDescription>
+        <value>&lt;p&gt;&lt;a href=&quot;&quot; style=&quot;color: #6F7678;&quot;&gt;Terms&lt;/a&gt;&amp;nbsp;&amp;nbsp;
+&lt;a href=&quot;&quot; style=&quot;color: #6F7678;&quot;&gt;Privacy&lt;/a&gt;&amp;nbsp;&amp;nbsp;
+&lt;/p&gt;</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginFooterTable_Column1Content</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginFooterTable Column1Content</shortDescription>
+        <value>Honda Motor Co., Ltd. is a Japanese public multinational conglomerate corporation primarily known as a manufacturer of automobiles, aircraft, motorcycles, and power equipment. Honda was the first Japanese automobile manufacturer to release a dedicated luxury brand, Acura, in 1986. Aside from their core automobile and motorcycle businesses, Honda also manufactures garden equipment, marine engines, personal watercraft and power generators, and other products.</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginFooterTable_Column1Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginFooterTable Column1Header</shortDescription>
+        <value>Become A Partner</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginFooterTable_Column2Content</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginFooterTable Column2Content</shortDescription>
+        <value>Honda Partner Portal enables Honda partners to access sales enablement tools and assets to help partners be more successful. It also is the entry point for valuable Products for partners on Honda&apos;s award winning products, where they fit, and how to sell them. Honda Partner Portal is also the entry point for easy to execute Deal Registrations for eligible partners.</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginFooterTable_Column2Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginFooterTable Column2Header</shortDescription>
+        <value>What is this Partner Portal?</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginFooterTable_Column3Content</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginFooterTable Column3Content</shortDescription>
+        <value>You have been invited to register for the Honda Partner Program. Simply fill out the user name and password fields and you will be guided to the next step where you can update your business profile and complete the registration process. If you have questions regarding how to register please contact your Partner Business Manager
+&lt;br/&gt;
+&lt;br/&gt;</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginFooterTable_Column3Header</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginFooterTable Column3Header</shortDescription>
+        <value>Register</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginHeaderBackgroundColor</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginHeaderBackgroundColor</shortDescription>
+        <value>#f4f4f4</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLoginSideBarHTMLContent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLoginSideBarHTMLContent</shortDescription>
+        <value>&lt;h3&gt;What is my User Name?&lt;/h3&gt;
+&lt;br/&gt;
+&lt;h3&gt;Your Username is&lt;/h3&gt;
+&lt;h3&gt;user@company.com&lt;/h3&gt;
+&lt;h3&gt;Example: &lt;/h3&gt;
+&lt;h3&gt;john.smith@company.com&lt;/h3&gt;
+&lt;br/&gt;
+&lt;h3&gt;If you have any questions, please contact your Partner Business&lt;/h3&gt; &lt;h3&gt;Manager or email us from the link below&lt;/h3&gt;
+&lt;h3&gt;&lt;a href=&quot;&quot; style=&quot;color: white&quot;&gt;&lt;u&gt;EmailUs &gt;&gt; &lt;/u&gt;&lt;/a&gt;&lt;/h3&gt;</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLogin_HeaderBannerImg</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLogin HeaderBannerImg</shortDescription>
+        <value>/resource/KCPQLogin_HeaderBannerImg</value>
+    </labels>
+    <labels>
+        <fullName>KCPQLogin_HeaderCompanyLogo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQLogin HeaderCompanyLogo</shortDescription>
+        <value>/resource/KCPQLogin_HeaderCompanyLogo</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_CommunityURLFor360View</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ CommunityURLFor360View</shortDescription>
+        <value>https://kesteassets.force.com/CPQPartnerCommunity</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_Company_Logo</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ_Company_Logo</shortDescription>
+        <value>edwhitelogo</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_Company_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ_Company_Name</shortDescription>
+        <value>Edison motors</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_FAQ_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ FAQ Email</shortDescription>
+        <value>partnerstories@salesforce.com</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_Inventory_Display_Limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ Inventory Display Limit</shortDescription>
+        <value>2</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_Inventory_Endpoint</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ Inventory Endpoint</shortDescription>
+        <value>https://fast-harbor-22123.herokuapp.com/order</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_PrintQuoteURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ PrintQuoteURL</shortDescription>
+        <value>https://lightningapp--sbqq.na35.visual.force.com/apex/PreviewDocument?id=</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_Quote_Process_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ Quote Process Id</shortDescription>
+        <value>a1741000001cgciAAA</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_Show_Company_Logo_Only</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ Show Company Logo Only</shortDescription>
+        <value>False</value>
+    </labels>
+    <labels>
+        <fullName>KCPQ_SubmitQuote_SuccessMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>KCPQ SubmitQuote SuccessMessage</shortDescription>
+        <value>Your Quote has been submitted successfully. Please click on the print button below to print a copy of the quote.</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Queue_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead Queue ID</shortDescription>
+        <value>00G41000001lBU6</value>
+    </labels>
+    <labels>
+        <fullName>Standard_Price_Book_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Standard Price Book Id</shortDescription>
+        <value>01s41000003eLKdAAM</value>
+    </labels>
+</CustomLabels>

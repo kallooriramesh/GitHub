@@ -1,0 +1,37 @@
+<aura:component controller="KCPQ_ContactInformationCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="progressStageOrder" type="Integer" />
+    <aura:attribute name="fields" type="Object[]" />
+    <aura:attribute name="fieldSetFields" type="KCPQ_FieldSetMember[]" />
+    <aura:attribute name="isContactInformationFormShow" type="Boolean" default="false" />
+    <aura:attribute name="contactObj" type="Contact" default="{LastName: ''}" />
+    <aura:attribute name="quoteId" type="Id"/>
+    <aura:attribute name="contactId" type="Id"/>
+    <aura:attribute name="isNextButtonShow" type="Boolean" default="true"/>
+    <aura:attribute name="isReadOnlyFields" type="Boolean" default="false"/>
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <aura:attribute name="pathprefixURL" type="String"/>
+    
+    <div>
+        <aura:if isTrue="{!v.isContactInformationFormShow}" >
+            <c:KCPQ_FieldSetForm sObjApiName="Contact" 
+                                 startLoading="{!v.startLoading}"
+                                 record="{!v.contactObj}"
+                                 fields="{!v.fieldSetFields}"
+                                 column="2"
+                                 isReadOnlyFields="{!v.isReadOnlyFields}"
+                                 messageTitle="{!v.messageTitle}"
+                                 messageText="{!v.messageText}"/>
+            
+            <aura:if isTrue="{!v.isNextButtonShow}" >
+                <div class="slds-text-align_right marginTopNextBtnCSS">
+                    <button class="btn btn-primary" type="button" onclick="{!c.doNextContactInfo}">Next</button>
+                    <a href="{!v.pathprefixURL + '/'}" class="btn btn-default">Cancel</a>
+                </div>
+            </aura:if>
+        </aura:if>
+    </div>
+</aura:component>

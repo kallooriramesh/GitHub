@@ -1,0 +1,19 @@
+<aura:component >
+    <aura:handler name="init" value="{!this}" action="{!c.doFieldSetInit}" />
+    <aura:attribute name="startLoading" type="Boolean" default="false" />
+    <aura:attribute name="record" type="Object" description="The record being edited" required="true"/>
+    <aura:attribute name="sObjApiName" type="String" required="true"/>
+    <aura:attribute name="fields" type="Object[]" required="true"/>
+    <aura:attribute name="form" type="Aura.Component[]"/>
+    <aura:attribute name="inputToField" type="Map"/>
+    <aura:attribute name="column" type="Integer" default="1" />
+    <aura:attribute name="isReadOnlyFields" type="Boolean" />
+	<aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />	
+    
+    <div class="MyContainer">
+        <p class="{!'custom-column-'+v.column}">
+            {!v.form}
+        </p>
+    </div>
+</aura:component>

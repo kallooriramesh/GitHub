@@ -1,0 +1,56 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" controller="KCPQ_SAQ_PBSelectionCtrl">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="pricebookPicklist" type="String" />
+    <aura:attribute name="pricebookPicklistVal" type="String" />
+    <aura:attribute name="quote" type="KCPQ_QuoteWrapper" />
+	<aura:attribute name="isPriceBookSeleted" type="Boolean" default="false"/>
+    <aura:attribute name="isShowNextButton" type="Boolean" default="false"/>
+    <aura:attribute name="startLoading" type="Boolean" />
+    <aura:attribute name="isShowPriceBookSelection" type="Boolean" default="false" />
+    
+    <div>
+        <aura:if isTrue="{!v.isShowPriceBookSelection}" >
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Start a Quote</h3>
+                </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Select </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                                <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 margintopCSS">
+                                    <div class="slds-form-element">
+                                        <label class="slds-text-body--medium" for="pricebook">
+                                            <abbr class="slds-required" title="Required">*</abbr> Pricebook </label>
+                                        <div class="slds-form-element__control">
+                                            <ui:inputSelect aura:id="pricebookPickListId" value="{!v.pricebookPicklist}" 
+                                                            required="required" class="slds-input formControlCSS" 
+                                                            onError="{!c.handleError}" onClearErrors="{!c.handleClearError}" 
+                                                            change="{!c.handleClearError}"/>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <br/><br/>
+                            <center>
+                                <aura:if isTrue="{!v.isShowNextButton}">
+                                    <button class="btn btn-primary" type="button" onclick="{!c.doNextSelectionComp}">Next</button>
+                                </aura:if>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

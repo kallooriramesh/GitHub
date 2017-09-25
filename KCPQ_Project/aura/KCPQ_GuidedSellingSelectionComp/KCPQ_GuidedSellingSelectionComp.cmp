@@ -1,0 +1,71 @@
+<aura:component controller="KCPQ_GuidedSellingSelectionCompCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="KCPQ_GuidedSellingSelectionBool" type="Boolean" default="false" />
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="quoteProcessPicklist" type="String" />
+    <aura:attribute name="pricebookPicklist" type="String" />
+    <aura:attribute name="quoteProcessPicklistVal" type="String" default="" />
+    <aura:attribute name="pricebookPicklistVal" type="String" default="" />
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <aura:attribute name="isQuickQuote" type="Boolean" default="false" />
+    <aura:attribute name="isShowSelection" type="Boolean" default="false" />
+    <aura:attribute name="runOneTimeOnly" type="Boolean" default="false" />
+    <aura:attribute name="runOneTimeOnlyCompleted" type="Boolean" default="false" />
+    
+    <div>
+        <aura:if isTrue="{!v.isShowSelection}">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Guided Selling</h3>
+                </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Select </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                                <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 ">
+                                    <div class="slds-form-element">
+                                        <label class="slds-text-body--medium" for="quoteProcess">
+                                            <abbr class="slds-required" title="Required">*</abbr> Quote Process </label>
+                                        <div class="slds-form-element__control">
+                                            <ui:inputSelect aura:id="quoteProcessPickListId" value="{!v.quoteProcessPicklist}" 
+                                                            class="slds-input formControlCSS" change="{!c.onQuoteProcessChange}"/>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-1 margintopCSS">
+                                    <div class="slds-form-element">
+                                        <label class="slds-text-body--medium" for="pricebook">
+                                            <abbr class="slds-required" title="Required">*</abbr> Pricebook </label>
+                                        <div class="slds-form-element__control">
+                                            <ui:inputSelect aura:id="pricebookPickListId" value="{!v.pricebookPicklist}" 
+                                                            required="required" class="slds-input formControlCSS" 
+                                                            onError="{!c.handleError}" onClearErrors="{!c.handleClearError}" 
+                                                            change="{!c.handleClearError}"/>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <br/><br/>
+                            <center>
+                                <button class="btn btn-primary" type="button" onclick="{!c.doNextSelectionComp}">Next</button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </aura:if>
+    </div>
+    
+</aura:component>

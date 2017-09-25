@@ -1,0 +1,69 @@
+.THIS .slds-spinner_container {
+	z-index: 9000;
+  	position: fixed;
+}
+
+.THIS .slds-card{
+    background: #ffffff !important;
+    border: 0px solid white !important;
+}
+
+.THIS .margintopCSS{
+    margin-top: 2% !important;
+}
+
+.THIS .uiInput--select.has-error.select{
+    border: 1px solid #CE5454;
+    box-shadow: 0 0 4px -2px #CE5454;
+}
+
+.THIS .uiInput--default.has-error .form-element__help {
+    float: left;
+    padding: 3px 10px;
+    color: #FFF;
+    border-radius: 3px 4px 4px 3px;
+    background-color: #CE5454;
+    max-width: 170px;
+    white-space: pre;
+    position: relative;
+    z-index: 1;
+    transition: .15s ease-out;
+    left: 0;
+    opacity: 1;
+}
+
+.THIS .page-title .title_left h3 {
+    font-size: 24px !important;
+}
+
+.THIS .uiInput--default .form-element__label{
+	font-weight: 700 !important;
+	color: inherit !important;
+    padding-top: 2% !important;
+}
+
+.THIS .ln_solid{
+    clear: both;
+    width: 100%;
+}
+
+.THIS .ln_solidHeader{
+    clear: both;
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    color: #fff;
+    background-color: #fff;
+    height: 1px;
+    margin: 10px 0;
+}
+
+.THIS .recommheaderLabelCSS{
+    font-weight: 700 !important;
+	color: inherit !important;
+}
+
+@media (max-width: 775px){
+	.THIS .recommheaderMediaCSS {
+		display: none;
+	}
+}

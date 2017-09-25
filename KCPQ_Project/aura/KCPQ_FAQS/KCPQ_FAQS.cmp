@@ -1,0 +1,49 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="KCPQ_FAQCtrl">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="faqList" type="List"/>
+    <aura:attribute name="siteName" type="String" default="" />
+    <!--ERROR Parameters-->
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <!-- ERROR Parameters END-->
+    
+    <aura:if isTrue="{!and(v.messageTitle != '', v.messageText != '')}" >
+        <c:KCPQ_DisplayToastMessage messageTitle="{!v.messageTitle}"
+                                    messageText="{!v.messageText}"/>
+    </aura:if>
+    
+
+    <div id="content_tab4">
+        <div class="nav-sub-content nav-sub-content-static nav-sub-content-static-hidden">
+            <h2 class="visible-phone">FAQ</h2>
+            <div class="tab-content">
+                <div id="tab4">
+                    <article>
+                        <aura:iteration items="{!v.faqList}" var="faq">
+                            
+                            <div class="slds-card__header slds-grid">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    
+                                    <div class="slds-media__body">
+                                        <h2>
+                                            <a class="slds-card__header-link" >
+                                            <span class="slds-text-heading_small" style="font-weight: bold;"  onclick="{!c.gotoURL}" id="{!faq.Id}">{!faq.Title}</span>
+                                            </a>
+                                        </h2>
+                                    </div>
+                                </header>
+                                
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner">{!faq.Summary}</div>
+                        </aura:iteration>
+                    </article>
+                    <br/>
+                    <p>Still have questions? Email 
+                        <a href="{!'mailto:'+$Label.c.KCPQ_FAQ_Email}" target="">
+                        {!$Label.c.KCPQ_FAQ_Email}</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

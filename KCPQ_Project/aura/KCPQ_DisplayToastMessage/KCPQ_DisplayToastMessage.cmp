@@ -1,0 +1,50 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    
+    <div>
+        <aura:if isTrue="{!and(v.messageTitle == 'ERROR', v.messageText != '')}">
+            <ui:message title="ERROR" severity="error" closable="false">
+                <div class="msgCloseBlockCSS">
+                    <span class="slds-assistive-text">Close</span>
+                    <lightning:buttonIcon title="Close" class="slds-input__icon slds-icon-text-default" 
+                                          iconName="utility:close" variant="brand" 
+                                          alternativeText="Close" onclick="{!c.doCloseUIMessage}" />
+                </div>
+                <div class="msgBlockCSS">
+                    <h3 class="slds-text-heading--small">{!v.messageText}</h3>
+                </div>
+            </ui:message>
+        </aura:if>
+        
+        <aura:if isTrue="{!and(v.messageTitle == 'SUCCESS', v.messageText != '')}">
+            <ui:message title="SUCCESS" severity="confirm" closable="false">
+                <div class="msgCloseBlockCSS">
+                    <span class="slds-assistive-text">Close</span>
+                    <lightning:buttonIcon title="Close" class="slds-input__icon slds-icon-text-default" 
+                                          iconName="utility:close" variant="brand" 
+                                          alternativeText="Close" onclick="{!c.doCloseUIMessage}" />
+                </div>
+                <div class="msgBlockCSS">
+                    <h3 class="slds-text-heading--small">{!v.messageText}</h3>
+                </div>
+            </ui:message>
+        </aura:if>
+        
+        <aura:if isTrue="{!and(v.messageTitle == 'INFO', v.messageText != '')}">
+            <ui:message title="Information" severity="info" closable="false">
+                <div class="msgCloseBlockCSS">
+                    <span class="slds-assistive-text">Close</span>
+                    <lightning:buttonIcon title="Close" class="slds-input__icon slds-icon-text-default" 
+                                          iconName="utility:close" variant="brand" 
+                                          alternativeText="Close" onclick="{!c.doCloseUIMessage}" />
+                </div>
+                <div class="msgBlockCSS">
+                    <h3 class="slds-text-heading--small">{!v.messageText}</h3>
+                </div>
+            </ui:message>
+        </aura:if>
+    </div>
+    
+</aura:component>

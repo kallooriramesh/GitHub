@@ -1,0 +1,273 @@
+<aura:component controller="KCPQ_HomePageSidebarCompCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="MenuWrapper" type="KCPQ_MenuWrapperCtrl[]"/>
+    <aura:attribute name="userInfo" type="User"/>
+    <aura:attribute name="baseURL" type="String"/>
+    <aura:attribute name="pathprefixURL" type="String"/>
+    <aura:attribute name="pWrapper" type="KCPQ_PartnerWrapper"/>
+    
+    <ltng:require styles="{!$Resource.KCPQ_v_bootstrap + '/dist/css/bootstrap.min.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_v_font_awesome + '/css/font-awesome.min.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_v_nprogress + '/nprogress.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_v_iCheck + '/skins/flat/green.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_v_bootstrap_progressbar + '/css/bootstrap-progressbar-3.3.4.min.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_v_jqvmap + '/dist/jqvmap.min.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_v_bootstrap_daterangepicker + '/daterangepicker.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_v_lightning_dist + '/KCPQ_v_lightning_dist/styles/index.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_b_build + '/css/custom.min.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_CustomLoadJS + '/KCPQ_CustomLoadJS/css/customCSS.css'}" />
+    <ltng:require styles="{!$Resource.KCPQ_ProductPreview_custom_edit+'/custom_edit.css'}" />
+    
+    <!--$Resource.KCPQ_v_nprogress + '/nprogress.js',-->
+    <ltng:require scripts="{!join(',',
+                           $Resource.KCPQ_v_jquery + '/dist/jquery.min.js', 
+                           $Resource.KCPQ_v_bootstrap + '/dist/js/bootstrap.min.js',
+                           $Resource.KCPQ_v_fastclick + '/lib/fastclick.js',
+                           
+                           $Resource.KCPQ_v_ChartJs + '/dist/Chart.min.js',
+                           $Resource.KCPQ_v_gaugeJS + '/dist/gauge.min.js',
+                           $Resource.KCPQ_v_bootstrap_progressbar + '/bootstrap-progressbar.min.js',
+                           
+                           $Resource.KCPQ_v_skycons + '/skycons.js',
+                           $Resource.KCPQ_v_Flot + '/jquery.flot.js',
+                           $Resource.KCPQ_v_Flot + '/jquery.flot.pie.js',
+                           $Resource.KCPQ_v_Flot + '/jquery.flot.time.js',
+                           $Resource.KCPQ_v_Flot + '/jquery.flot.stack.js',
+                           $Resource.KCPQ_v_Flot + '/jquery.flot.resize.js',
+                           $Resource.KCPQ_v_flot_orderbars + '/js/jquery.flot.orderBars.js',
+                           $Resource.KCPQ_v_flot_spline + '/js/jquery.flot.spline.min.js',
+                           $Resource.KCPQ_v_flot_curvedlines + '/curvedLines.js',
+                           
+                           $Resource.KCPQ_v_jqvmap + '/dist/jquery.vmap.js',
+                           $Resource.KCPQ_v_jqvmap + '/dist/maps/jquery.vmap.world.js',
+                           $Resource.KCPQ_v_jqvmap + '/examples/js/jquery.vmap.sampledata.js',
+                           $Resource.KCPQ_v_moment + '/min/moment.min.js',
+                           $Resource.KCPQ_v_bootstrap_daterangepicker + '/daterangepicker.js',
+                           $Resource.KCPQ_b_build_customJs + '/KCPQ_b_build_customJs/js/custom.js',
+                           $Resource.KCPQ_CustomLoadJS + '/KCPQ_CustomLoadJS/js/customLoad.js',
+                  		   $Resource.KCPQ_ProductPreview_jquery + '/jquery.js',
+                           $Resource.KCPQ_ProductPreview_jquery + '/jquery.min.js')}"/>
+    
+    <div>
+        <body class="nav-md">
+            <aura:if isTrue="{!v.startLoading}" >
+                <c:KCPQ_LoadingFunctionalityComp />
+            </aura:if>
+            <div class="container body">
+                <div class="main_container">
+                    <div class="col-md-3 left_col">
+                        <div class="left_col scroll-view" style="{! 'background:' + v.pWrapper.sidebarColor}">
+                            <div class="navbar nav_title" style="{! 'border: 0;background:' + v.pWrapper.sidebarColor}">
+                                <a href="" class="site_title">
+                                    <!--<i class="{! 'fa' + ' ' + $Label.c.KCPQ_Company_Logo}"></i>-->
+                                    <div class="{! if(v.pWrapper.showCompanyLogoOnly == true,'','profile_pic')}" >
+                                        <!--<img src="{! '/resource/' + $Label.c.KCPQ_Company_Logo}" alt="{!$Label.c.KCPQ_Company_Name}" 
+                                         class="profile_img companyPicCSS" />-->
+                                        <img src="{! v.baseURL + '/resource/' + v.pWrapper.logoName}" alt="{!$Label.c.KCPQ_Company_Name}" 
+                                         class="profile_img companyPicCSS" />
+                                    </div>
+                                    &nbsp;
+                                    <span>{!$Label.c.KCPQ_Company_Name}</span>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <!-- menu profile quick info -->
+                            <div class="profile clearfix">
+                                <div class="profile_pic">
+                                    <img src="{!v.userInfo.SmallPhotoUrl}" alt="{!v.userInfo.Name}" 
+                                         class="img-circle profile_img" />
+                                </div>
+                                <div class="profile_info">
+                                    <span>Welcome,</span>
+                                    <h2>{!v.userInfo.Name}</h2>
+                                </div>
+                            </div>
+                            <!-- /menu profile quick info -->
+                            
+                            <br />
+                            
+                            <!-- sidebar menu -->
+                            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                                <div class="menu_section">
+                                    <h3>General</h3>
+                                    <ul class="nav side-menu">
+                                        <aura:iteration items="{!v.MenuWrapper}" var="m" > 
+                                            <li>
+                                                <aura:if isTrue="{!m.isChildMenu}">
+                                                    <a href="{! v.pathprefixURL + m.menu.Link__c}" style="{! 'background:' + v.pWrapper.sidebarColor}">
+                                                        <i class="{! 'fa' + ' ' + m.menu.Icon__c}"></i> {!m.menu.Name} 
+                                                    </a>
+                                                </aura:if>
+                                                <aura:if isTrue="{!!m.isChildMenu}">
+                                                    <a style="{! 'background:' + v.pWrapper.sidebarColor}">
+                                                        <i class="{! 'fa' + ' ' + m.menu.Icon__c}"></i> {!m.menu.Name} 
+                                                        <span class="{! if(m.isChildMenu,'','fa fa-chevron-down')}"></span>
+                                                    </a>
+                                                </aura:if>
+                                                <ul class="nav child_menu">
+                                                    <aura:iteration items="{!m.lstChildMenu}" var="menuChild" > 
+                                                        <li>
+                                                            <a href="{! v.pathprefixURL + menuChild.menu.Link__c}" style="{! 'background:' + v.pWrapper.sidebarColor}">{!menuChild.menu.Name}</a>
+                                                        </li>
+                                                    </aura:iteration>
+                                                </ul>
+                                            </li>
+                                        </aura:iteration>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- /sidebar menu -->
+                            
+                            <!-- /menu footer buttons -->
+                            <div class="sidebar-footer hidden-small" >
+                                <!--<a data-toggle="tooltip" data-placement="top" title="Settings">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                </a>
+                                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                                </a>
+                                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                                    <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                                </a>-->
+                                <a data-toggle="tooltip" data-placement="top" title="Logout" href="{! v.baseURL + '/secur/logout.jsp'}" style="{! 'background:' + v.pWrapper.sidebarColor}">
+                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                            <!-- /menu footer buttons -->
+                        </div>
+                    </div>
+                    <!-- top navigation -->
+                    <div class="top_nav">
+                        <div class="nav_menu">
+                            <nav>
+                                <div class="nav toggle">
+                                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- /top navigation -->
+                    
+                    
+                    <!-- top navigation -->
+                    <!--<div class="top_nav">
+                        <div class="nav_menu">
+                            <nav>
+                                <div class="nav toggle">
+                                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                                </div>
+                                <ul class="nav">
+                                    <li role=" presentation">
+                                        <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-left top_search">
+                                            <div class="input-group" style="margin-top:10px;" >
+                                                <input type="text" class="form-control small" placeholder="Search for..." />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button">Go!</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    
+                                    <li role=" presentation">
+                                        <ul class="nav navbar-nav navbar-right">
+                                            <li class="">
+                                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    <img src="" alt="" />John Doe
+                                                    <span class=" fa fa-angle-down"></span>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                                    <li><a href="javascript:;"> Profile</a></li>
+                                                    <li>
+                                                        <a href="javascript:;">
+                                                            <span class="badge bg-red pull-right">50%</span>
+                                                            <span>Settings</span>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="javascript:;">Contact Support</a></li>
+                                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                                </ul>
+                                            </li>
+                                            
+                                            <li role="presentation" class="dropdown">
+                                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-bell-o"></i>
+                                                    <span class="badge bg-green">6</span>
+                                                </a>
+                                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                                    <li>
+                                                        <a>
+                                                            <span class="image"><img src="" alt="Profile Image" /></span>
+                                                            <span>
+                                                                <span>Edison Motors</span>
+                                                                <span class="time">10 mins ago</span>
+                                                            </span>
+                                                            <span class="message">
+                                                                Edison Fiero has a new promotional discount of 5% off MSRP. Read more...
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <span class="image"><img src="" alt="Profile Image" /></span>
+                                                            <span>
+                                                                <span>Edison Motors</span>
+                                                                <span class="time">5 days ago</span>
+                                                            </span>
+                                                            <span class="message">
+                                                                Product Recall issued on multiple models across years for faulty airbags. Read more...
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a>
+                                                            <span class="image"><img src="" alt="Profile Image" /></span>
+                                                            <span>
+                                                                <span>Edison Motors</span>
+                                                                <span class="time">20 days ago</span>
+                                                            </span>
+                                                            <span class="message">
+                                                                Warranty Policy updated for the Watson model. Increased coverage for current year cars. Read more...
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <div class="text-center">
+                                                            <a>
+                                                                <strong>See All Alerts</strong>
+                                                                <i class="fa fa-angle-right"></i>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="badge bg-red"><strong>GOLD PARTNER</strong></span>
+                                                </a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
+                                </ul>
+                                
+                            </nav>
+                        </div>
+                    </div>-->
+                    <!-- /top navigation -->
+                    
+                    <!-- page content -->
+                    <!--<div class="right_col" role="main">
+                        
+                    </div>-->
+                    
+                    <br />
+                    <!-- /page content -->
+                </div>
+            </div>
+            
+        </body>
+    </div>
+</aura:component>

@@ -1,0 +1,162 @@
+<aura:component controller="KCPQ_ProductFeatureOptionsCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="progressStageOrder" type="Integer" />
+    <aura:attribute name="quoteId" type="Id"/>
+    <aura:attribute name="featureIds" type="String[]"/>
+    <aura:attribute name="featureId" type="String"/>
+    <aura:attribute name="mainProduct" type="Product2" />
+    <aura:attribute name="proCurrencySymbol" type="String" />
+    <aura:attribute name="mainProductPrice" type="Decimal" />
+    <aura:attribute name="mainProductNetPrice" type="Decimal" />
+    <aura:attribute name="wrappers" type="KCPQ_FeatureProductsWrapper[]" />
+    <aura:attribute name="inventory" type="Integer" />
+    <aura:attribute name="summaryWrappers" type="KCPQ_FeatureProductsWrapper[]" />
+    <aura:attribute name="total" type="Decimal" />
+    <aura:attribute name="featureWrapper" type="KCPQ_ProductFeatureWrapper" />
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    
+    <aura:attribute name="ProductOptionWrapper" type="KCPQ_ProductOptionWrapperCtrl[]"/>
+    <aura:attribute name="mainProductDiscountValue" type="Decimal" default="0"/>
+    <aura:attribute name="isShowDetails" type="Boolean" default="false" />
+    <aura:attribute name="baseURL" type="String"/>
+    <aura:attribute name="pathprefixURL" type="String"/>
+    
+    <div>
+        <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+            <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_4-of-6 ">
+                
+                <fieldset class="slds-box slds-theme--default slds-container--large">                
+                    <legend class="customLegendCSS slds-text-heading--small">
+                        
+                    </legend>
+                    <div class="proContainer">
+                        <aura:if isTrue="{!v.isShowDetails}">
+                            <aura:iteration items="{!v.ProductOptionWrapper}" var="prodOpt" indexVar="i">
+                                <aura:if isTrue="{!prodOpt.featureId == v.featureId}" >
+                                    <div class="outercontainer">
+                                        <div class="innercontent" >
+                                            <ul class="ulCSS slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                                                <li class="slds-size_1-of-1 slds-medium-size_2-of-7 ">
+                                                    <table>
+                                                        <tr>
+                                                            <aura:unescapedHtml value="{!prodOpt.productName}"/><br/>
+                                                        </tr>
+                                                        <tr>
+                                                            <div class="productImgSelectCSS">
+                                                                <aura:unescapedHtml value="{!prodOpt.productImage}" />
+                                                            </div>
+                                                        </tr>
+                                                    </table>
+                                                </li>
+                                                <li class="slds-size_1-of-1 slds-medium-size_3-of-7 slds-align_absolute-center">
+                                                    <aura:unescapedHtml value="{!prodOpt.productDescription}" />
+                                                </li>
+                                                <li class="slds-size_1-of-1 slds-medium-size_2-of-7 slds-align_absolute-center">
+                                                    <aura:if isTrue="{!prodOpt.isCheckBox}" >
+                                                        <ui:inputCheckbox text="{!prodOpt.productRecordId}" 
+                                                                          value="{!prodOpt.isSelected}"
+                                                                          change="{!c.onChangeCheck}"
+                                                                          disabled="{!prodOpt.isDisabled}"/>
+                                                        &nbsp;
+                                                        <ui:outputCurrency value="{!prodOpt.unitPrice}" />
+                                                        &nbsp;&nbsp;
+                                                        <label class="disabledMsgCSS" >{!prodOpt.disabledMsg}</label>
+                                                    </aura:if>
+                                                    <aura:if isTrue="{!!prodOpt.isCheckBox}" >
+                                                        <ui:inputRadio text="{!prodOpt.productRecordId}" 
+                                                                       value="{!prodOpt.isSelected}"
+                                                                       change="{!c.onChangeCheck}"
+                                                                       disabled="{!prodOpt.isDisabled}"/> 
+                                                        &nbsp;
+                                                        <ui:outputCurrency value="{!prodOpt.unitPrice}" />
+                                                        &nbsp;&nbsp;
+                                                        <label class="disabledMsgCSS" >{!prodOpt.disabledMsg}</label>
+                                                    </aura:if>
+                                                </li>
+                                            </ul>
+                                            <div class="ln_solid"></div>
+                                        </div>
+                                    </div>
+                                </aura:if>
+                            </aura:iteration>
+                        </aura:if>
+                    </div>
+                </fieldset>
+            </li>            
+            <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_2-of-6">
+                <table>
+                    <tr>
+                        <fieldset class="slds-box slds-theme--default slds-container--small">                
+                            <legend class="customLegendCSS slds-text-heading--small">
+                                Inventory
+                            </legend>
+                            <div class="slds-align_absolute-center">
+                                <label class="inventoryLabelCSS">{!v.inventory}</label>
+                            </div>
+                        </fieldset>
+                    </tr>
+                    <tr>
+                        <div class="SummaryDiv">
+                            <fieldset class="slds-box slds-theme--default slds-container--small">                
+                                <legend class="customLegendCSS slds-text-heading--small">
+                                    Summary
+                                </legend>
+                                <div>
+                                    <aura:if isTrue="{!v.isShowDetails}">
+                                        <div class="SummaryContent" id="fixedHeightSummaryContent">
+                                            
+                                            <ul class="slds-card__body_inner slds-grid slds-wrap">
+                                                <li class="slds-size_1-of-1 slds-medium-size_3-of-5">
+                                                    <aura:unescapedHtml value="{!v.mainProduct.Name}" />
+                                                </li>
+                                                <li class="slds-size_1-of-1 slds-medium-size_2-of-5">
+                                                    <ui:outputCurrency value="{!v.mainProductPrice}" />
+                                                </li>
+                                            </ul>
+                                            <div class="ln_solidSummaryCSS"></div>
+                                            
+                                            <aura:iteration items="{!v.ProductOptionWrapper}" var="prodOpt">
+                                                <aura:if isTrue="{!prodOpt.isSelected}" >
+                                                    <ul class="slds-card__body_inner slds-grid slds-wrap">
+                                                        <li class="slds-size_1-of-1 slds-medium-size_3-of-5">
+                                                            <aura:unescapedHtml value="{!prodOpt.productName}" />
+                                                        </li>
+                                                        <li class="slds-size_1-of-1 slds-medium-size_2-of-5">
+                                                            <ui:outputCurrency value="{!prodOpt.unitPrice}" />
+                                                        </li>
+                                                    </ul>
+                                                    <div class="ln_solidSummaryCSS"></div>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </div>
+                                        <div class="totalCSS">
+                                            <ul class="slds-card__body_inner slds-grid slds-wrap">
+                                                <li class="slds-size_1-of-1 slds-medium-size_3-of-5">
+                                                    <label class="boldCSS">Total</label>
+                                                </li>
+                                                <li class="slds-size_1-of-1 slds-medium-size_2-of-5">
+                                                    <ui:outputCurrency class="boldCSS" value="{!v.total}" />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </aura:if>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </tr>
+                    <tr>
+                        <center>
+                            <button class="btn btn-primary" type="button" onclick="{!c.nextClicked}">Next</button>
+                            <button class="btn btn-default" type="button" onclick="{!c.doBack}">Back</button>
+                            <a href="{!v.pathprefixURL + '/'}" class="btn btn-default">Cancel</a>
+                        </center>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+    </div>
+    
+</aura:component>

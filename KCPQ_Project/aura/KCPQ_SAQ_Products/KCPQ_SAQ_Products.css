@@ -1,0 +1,9 @@
+.THIS img{
+    height: 175px !important;
+    width: 280px !important;
+}
+
+.THIS .slds-spinner_container {
+    z-index: 9000;
+    position: fixed;
+}

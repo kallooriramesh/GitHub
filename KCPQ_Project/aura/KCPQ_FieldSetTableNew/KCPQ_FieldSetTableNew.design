@@ -1,0 +1,9 @@
+<design:component >
+    <design:attribute name="sObjectAPIName" label="sObject API Name" default="Lead" datasource="Lead,SBQQ__Quote__c" />
+    <design:attribute name="FieldSetAPIName" label="FieldSet API Name" default="KCPQ_LatestLeadsHome" datasource="KCPQ_LatestLeadsHome,KCPQ_HomeLatestCustomerQuotes" />
+    <design:attribute name="limit" label="Limit" default="Latest 5" datasource="Latest 5,All" />
+    <design:attribute name="orderByField" label="Order By Field API Name" Default="CreatedDate" />
+    <design:attribute name="orderBy" label="Order By" Default="DESC" datasource="ASC,DESC"/>
+    <design:attribute name="headder" label="Headder" Default="Latest Leads from Corporate" />
+    <design:attribute name="headderIcon" label="Headder Icon" Default="lead" datasource="lead,quotes"/>
+</design:component>

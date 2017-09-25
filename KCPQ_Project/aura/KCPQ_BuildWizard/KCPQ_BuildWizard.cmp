@@ -1,0 +1,122 @@
+<aura:component controller="KCPQ_BuildWizardCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="quoteId" type="Id"/>
+    <aura:attribute name="mainProduct" type="Product2" />
+    <aura:attribute name="currencySymbol" type="String" />
+    <aura:attribute name="mainProductPrice" type="Decimal" />
+    <aura:attribute name="mainProductNetPrice" type="Decimal" />
+    <aura:attribute name="productWrapper" type="KCPQ_ProductWrapperCtrl"/>
+    <aura:attribute name="progressWrapper" type="KCPQ_ProgressBarWrapper[]"/>
+    <aura:attribute name="progressStageOrder" type="Integer" />
+    <aura:attribute name="isProgressBarShow" type="Boolean" default="false" />
+    <aura:attribute name="featureNames" type="String[]"/>
+    <aura:attribute name="featureIds" type="String[]"/>
+    <aura:attribute name="featureId" type="String"/>
+    <aura:attribute name="summaryWrappers" type="KCPQ_FeatureProductsWrapper[]" />
+    <aura:attribute name="inventory" type="Integer" />
+    <aura:attribute name="total" type="Decimal"/>
+    <aura:attribute name="colorNames" type="String[]"/>
+    <aura:attribute name="isSuccessfullySubmitted" type="Boolean" default="false"/>
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    
+    <aura:attribute name="ProductOptionWrapper" type="KCPQ_ProductOptionWrapperCtrl[]"/>
+    <aura:attribute name="mainProductDiscountValue" type="Decimal" default="0"/>
+    <aura:attribute name="isSubmitButtonDisabled" type="Boolean" />
+    
+    <aura:if isTrue="{!!v.isSuccessfullySubmitted}" >
+        <c:KCPQ_ProductOverview startLoading="{!v.startLoading}"
+                                mainProduct="{!v.mainProduct}"
+                                currencySymbol="{!v.currencySymbol}"
+                                mainProductPrice="{!v.mainProductPrice}"
+                                colorNames="{!v.colorNames}"
+                                messageTitle="{!v.messageTitle}"
+                                messageText="{!v.messageText}"/>
+        
+        <aura:if isTrue="{!and(v.messageTitle != '', v.messageText != '')}" >
+        	<c:KCPQ_DisplayToastMessage messageTitle="{!v.messageTitle}"
+                                        messageText="{!v.messageText}"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.isProgressBarShow}" >
+            <c:KCPQ_ProgressBar startLoading="{!v.startLoading}"
+                                progressWrapper="{!v.progressWrapper}"
+                                progressStageOrder="{!v.progressStageOrder}"
+                                messageTitle="{!v.messageTitle}"
+                                messageText="{!v.messageText}"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.progressStageOrder == 1}" >
+            <c:KCPQ_ContactInformation startLoading="{!v.startLoading}"
+                                       progressStageOrder="{!v.progressStageOrder}"
+                                       quoteId="{!v.quoteId}"
+                                       messageTitle="{!v.messageTitle}"
+                                       messageText="{!v.messageText}"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.featureIds != null || v.featureIds.length > 0}" >
+            <aura:iteration items="{!v.featureIds}" var="fId" indexVar="i">
+                <aura:if isTrue="{!v.progressStageOrder == (i+2)}" >
+                    <c:KCPQ_ProductFeatureOptions startLoading="{!v.startLoading}"
+                                                  progressStageOrder="{!v.progressStageOrder}"
+                                                  quoteId="{!v.quoteId}"
+                                                  mainProduct="{!v.mainProduct}"
+                                                  mainProductNetPrice="{!v.mainProductNetPrice}"
+                                                  featureId="{!fId}"
+                                                  proCurrencySymbol="{!v.currencySymbol}"
+                                                  mainProductPrice="{!v.mainProductPrice}"
+                                                  summaryWrappers="{!v.summaryWrappers}"
+                                                  inventory="{!v.inventory}"
+                                                  total="{!v.total}"
+                                                  messageTitle="{!v.messageTitle}"
+                                                  messageText="{!v.messageText}"
+                                                  ProductOptionWrapper="{!v.ProductOptionWrapper}"
+                                                  mainProductDiscountValue="{!v.mainProductDiscountValue}"/>
+                </aura:if>
+            </aura:iteration>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.progressStageOrder == v.featureIds.length + 2}" >
+            <c:KCPQ_Discounts startLoading="{!v.startLoading}"
+                              progressStageOrder="{!v.progressStageOrder}"
+                              quoteId="{!v.quoteId}"
+                              mainProduct="{!v.mainProduct}"
+                              mainProductPrice="{!v.mainProductPrice}"
+                              mainProductNetPrice="{!v.mainProductNetPrice}"
+                              proCurrencySymbol="{!v.currencySymbol}"
+                              summaryWrappers="{!v.summaryWrappers}"
+                              inventory="{!v.inventory}"
+                              total="{!v.total}"
+                              messageTitle="{!v.messageTitle}"
+                              messageText="{!v.messageText}"
+                              ProductOptionWrapper="{!v.ProductOptionWrapper}"
+                              mainProductDiscountValue="{!v.mainProductDiscountValue}"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.progressStageOrder == v.featureIds.length + 3}" >
+            <c:KCPQ_Summary startLoading="{!v.startLoading}"
+                            progressStageOrder="{!v.progressStageOrder}"
+                            quoteId="{!v.quoteId}"
+                            mainProduct="{!v.mainProduct}"
+                            mainProductPrice="{!v.mainProductPrice}"
+                            mainProductNetPrice="{!v.mainProductNetPrice}"
+                            proCurrencySymbol="{!v.currencySymbol}"
+                            inventory="{!v.inventory}"
+                            featureNames="{!v.featureNames}"
+                            isSuccessfullySubmitted="{!v.isSuccessfullySubmitted}"
+                            messageTitle="{!v.messageTitle}"
+                            messageText="{!v.messageText}"
+                            ProductOptionWrapper="{!v.ProductOptionWrapper}"
+                            mainProductDiscountValue="{!v.mainProductDiscountValue}"
+                            isSubmitButtonDisabled="{!v.isSubmitButtonDisabled}"/>
+        </aura:if>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.isSuccessfullySubmitted}" >
+        <c:KCPQ_SubmitQuote startLoading="{!v.startLoading}"
+                            quoteId="{!v.quoteId}" />
+    </aura:if>
+    
+</aura:component>

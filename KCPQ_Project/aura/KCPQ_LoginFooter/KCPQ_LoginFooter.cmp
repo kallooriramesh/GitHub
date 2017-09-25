@@ -1,0 +1,68 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes">
+    
+    <ltng:require styles="/resource/SLDS/assets/styles/salesforce-lightning-design-system-vf.css"/>
+    <aura:attribute name="KCPQLoginFooterTableColumn1Header" type="String" default="{!$Label.c.KCPQLoginFooterTable_Column1Header}" />
+    <aura:attribute name="KCPQLoginFooterTableColumn2Header" type="String" default="{!$Label.c.KCPQLoginFooterTable_Column2Header}" />
+    <aura:attribute name="KCPQLoginFooterTableColumn3Header" type="String" default="{!$Label.c.KCPQLoginFooterTable_Column3Header}" />
+    <aura:attribute name="KCPQLoginFooterTableColumn1Content" type="String" default="{!$Label.c.KCPQLoginFooterTable_Column1Content}" />
+    <aura:attribute name="KCPQLoginFooterTableColumn2Content" type="String" default="{!$Label.c.KCPQLoginFooterTable_Column2Content}" />
+    <aura:attribute name="KCPQLoginFooterTableColumn3Content" type="String" default="{!$Label.c.KCPQLoginFooterTable_Column3Content}" />
+    <aura:attribute name="KCPQLoginFooterLinksHTML" type="String" default="{!$Label.c.KCPQLoginFooterLinks_HTMLContent}" />
+    
+    <div>
+        <table class="tableCSS">
+            <br/>
+            <tr>
+                <th>
+                    <h1>
+                        <button class="slds-button slds-button--icon-border" type="button" >
+                            <span>
+                                <c:KCPQ_SVG class="slds-button__icon" xlinkHref="/resource/SLDS/assets/icons/utility-sprite/svg/symbols.svg#adduser"/>
+                            </span>
+                            <span class="slds-assistive-text">{!v.KCPQLoginFooterTableColumn1Header}</span>
+                        </button>&nbsp;
+                        <aura:unescapedHtml value="{!v.KCPQLoginFooterTableColumn1Header}" />
+                    </h1>
+                </th>
+                <th>
+                    <h1>
+                        <button class="slds-button slds-button--icon-border" type="button" >
+                            <span>
+                                <c:KCPQ_SVG class="slds-button__icon" xlinkHref="/resource/SLDS/assets/icons/utility-sprite/svg/symbols.svg#table"/>
+                            </span>
+                            <span class="slds-assistive-text">{!v.KCPQLoginFooterTableColumn2Header}</span>
+                        </button>&nbsp;
+                        <aura:unescapedHtml value="{!v.KCPQLoginFooterTableColumn2Header}" />
+                    </h1>
+                </th>
+                <th>
+                    <h1>
+                        <button class="slds-button slds-button--icon-border" type="button" >
+                            <span>
+                                <c:KCPQ_SVG class="slds-button__icon" xlinkHref="/resource/SLDS/assets/icons/utility-sprite/svg/symbols.svg#touch_action"/>
+                            </span>
+                            <span class="slds-assistive-text">{!v.KCPQLoginFooterTableColumn3Header}</span>
+                        </button>&nbsp;
+                        <aura:unescapedHtml value="{!v.KCPQLoginFooterTableColumn3Header}" />
+                    </h1>
+                </th>
+            </tr>
+            <br/>
+            <tr>
+                <td><aura:unescapedHtml value="{!v.KCPQLoginFooterTableColumn1Content}" /></td>
+                <td style="color:#6F7678;padding-bottom: 85px;vertical-align: top;">
+                    <aura:unescapedHtml value="{!v.KCPQLoginFooterTableColumn2Content}" />
+                </td>
+                <td style="color:#6F7678;padding-bottom: 68px;vertical-align: top;padding-right:10px">
+                    <aura:unescapedHtml value="{!v.KCPQLoginFooterTableColumn3Content}" />
+                </td>
+            </tr>
+        </table>
+        <div class="footerDiv">
+            <div class="footerLinks">
+                <aura:unescapedHtml value="{!v.KCPQLoginFooterLinksHTML}" />
+            </div>
+        </div>
+    </div>
+    
+</aura:component>

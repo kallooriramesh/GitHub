@@ -1,0 +1,148 @@
+.THIS .customLegendCSS{
+    padding-bottom: 0px;
+    width: inherit;
+    margin-bottom: 0px;
+}
+
+.THIS .ulCSS {
+    min-height: 7rem;
+    width: 100%;
+}
+
+.THIS .proContainer {
+    max-height: 14rem;
+    height: 14rem;
+    overflow: auto;
+}
+
+.THIS .ln_solid {
+    margin: 10px 0;
+    width: 95%;
+}
+
+.THIS .proContainer::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: white !important;
+    width: 1px;
+}
+
+.THIS .proContainer::-webkit-scrollbar{
+	width: 8px;
+	background-color: #2A3F54 !important;
+}
+
+.THIS .proContainer::-webkit-scrollbar-thumb{
+	background: #2A3F54 !important;
+}
+
+.THIS .inventoryLabelCSS {
+    font-weight: 400;
+    font-size: 22px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.THIS .SummaryContent::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: white !important;
+    width: 1px;
+}
+
+.THIS .SummaryContent::-webkit-scrollbar{
+	width: 8px;
+	background-color: #2A3F54 !important;
+}
+
+.THIS .SummaryContent::-webkit-scrollbar-thumb{
+	background: #2A3F54 !important;
+}
+
+.THIS .SummaryDiv {
+    margin-bottom : 1%;
+}
+
+.THIS .SummaryContent {
+    height: 7rem;
+    overflow: auto;
+}
+
+.THIS .ln_solidSummaryCSS{
+    border-top: 1px solid #e5e5e5;
+    color: #fff;
+    background-color: #fff;
+    height: 1px;
+    margin: 4px 0;
+    width: 100%;
+}
+
+.THIS .totalCSS {
+    padding-top: 3%;
+    border-top: 2px solid #2A3F54;
+}
+
+.THIS .boldCSS {
+    font-weight: bold;
+}
+
+.THIS .YourBuildSummaryFieldSetCSS {
+    /*max-height: 23rem !important;*/
+    height: auto !important;
+}
+
+.THIS .yourBuildSummaryHeaderCSS {
+    padding-top: 2% !important;
+    padding-bottom: 1% !important;
+    margin-bottom: 2% !important;
+    padding: 1rem;
+    border-radius: 0.20rem;
+    border: 1px solid #d8dde6;
+    background-color: #e8f2f8;
+}
+
+.THIS .YourBuildSummaryChangeLinkCSS {
+    /*max-height: 17rem;*/
+    height: 18.5rem;
+    max-height: 18.5rem;
+    overflow: auto;
+    border: 1px solid #d8dde6;
+    border-radius: .25rem;
+}
+
+.THIS .YourBuildSummaryChangeLinkCSS::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: white !important;
+    width: 1px;
+}
+
+.THIS .YourBuildSummaryChangeLinkCSS::-webkit-scrollbar{
+	width: 8px;
+	background-color: #2A3F54 !important;
+}
+
+.THIS .YourBuildSummaryChangeLinkCSS::-webkit-scrollbar-thumb{
+	background: #2A3F54 !important;
+}
+
+.THIS .ContactInfoBlockCSS{
+    max-height : 20rem !important;
+    overflow: auto;
+}
+
+.THIS .ContactInfoBlockCSS::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: white !important;
+    width: 1px;
+}
+
+.THIS .ContactInfoBlockCSS::-webkit-scrollbar{
+	width: 8px;
+	background-color: #2A3F54 !important;
+}
+
+.THIS .ContactInfoBlockCSS::-webkit-scrollbar-thumb{
+	background: #2A3F54 !important;
+}
+
+.THIS .changeLinkCSS {
+    color: #0070d2;
+}

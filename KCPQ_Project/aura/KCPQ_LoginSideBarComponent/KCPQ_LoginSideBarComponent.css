@@ -1,0 +1,9 @@
+.THIS .sidebarContent{
+    float: left;
+    width: 100%;
+    background: #2f3132;
+    color: #ffffff;
+    padding: 30px 30px;
+    font-family: Helvetica;
+    height: 320px;
+}

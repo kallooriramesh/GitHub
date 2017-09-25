@@ -1,0 +1,61 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:attribute name="KCPQ_GuidedSellingSelectionBool" type="Boolean" default="false" />
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="quoteProcessPicklist" type="String" />
+    <aura:attribute name="pricebookPicklist" type="String" />
+    <aura:attribute name="quoteProcessPicklistVal" type="String" default="" />
+    <aura:attribute name="pricebookPicklistVal" type="String" default="" />
+    <aura:attribute name="isSubmitted" type="Boolean" default="false" />
+    <aura:attribute name="tempProductObj" type="Product2" default="{Name: 'Dummy'}" />
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <aura:attribute name="isQuickQuote" type="Boolean" default="false" />
+    
+    <div>
+        <aura:if isTrue="{!v.startLoading}" >
+            <c:KCPQ_LoadingFunctionalityComp />
+        </aura:if>
+        
+        <aura:if isTrue="{!and(v.messageTitle != '', v.messageText != '')}" >
+        	<c:KCPQ_DisplayToastMessage messageTitle="{!v.messageTitle}"
+                                        messageText="{!v.messageText}"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!!v.KCPQ_GuidedSellingSelectionBool}" >
+            <c:KCPQ_GuidedSellingSelectionComp startLoading="{!v.startLoading}" 
+                                               KCPQ_GuidedSellingSelectionBool="{!v.KCPQ_GuidedSellingSelectionBool}"
+                                               quoteProcessPicklist="{!v.quoteProcessPicklist}"
+                                               pricebookPicklist="{!v.pricebookPicklist}"
+                                               quoteProcessPicklistVal="{!v.quoteProcessPicklistVal}"
+                                               pricebookPicklistVal="{!v.pricebookPicklistVal}"
+                                               messageTitle="{!v.messageTitle}"
+                                               messageText="{!v.messageText}"
+                                               isQuickQuote="{!v.isQuickQuote}"/>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.KCPQ_GuidedSellingSelectionBool &amp;&amp; !v.isSubmitted}" >
+            <div>
+                <c:KCPQ_GuidedSellingQuestionComp startLoading="{!v.startLoading}"
+                                                  pricebookId="{!v.pricebookPicklistVal}" 
+                                                  quoteProcessId="{!v.quoteProcessPicklistVal}"
+                                                  isSubmitted="{!v.isSubmitted}"
+                                                  tempProductObj="{!v.tempProductObj}"
+                                                  messageTitle="{!v.messageTitle}"
+                                                  messageText="{!v.messageText}"/>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.isSubmitted}" >
+            <div>
+                <c:KCPQ_ProductRecommendationComp startLoading="{!v.startLoading}"
+                                                  pricebookId="{!v.pricebookPicklistVal}" 
+                                                  quoteProcessId="{!v.quoteProcessPicklistVal}" 
+                                                  tempProductObj="{!v.tempProductObj}"
+                                                  isSubmitted="{!v.isSubmitted}"
+                                                  messageTitle="{!v.messageTitle}"
+                                                  messageText="{!v.messageText}"/>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,10 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes">
+	
+    <aura:attribute name="KCPQLoginSideBarContent" type="String" default="{!$Label.c.KCPQLoginSideBarHTMLContent}" />
+    
+    <div>
+		<div class="sidebarContent">
+            <aura:unescapedHtml value="{!v.KCPQLoginSideBarContent}" />
+        </div>
+    </div>
+</aura:component>

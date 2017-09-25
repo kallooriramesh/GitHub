@@ -1,0 +1,22 @@
+.THIS .pageSelected {
+    
+    font-weight:bold;
+}
+
+.THIS .pagenonSelected {
+    font-weight: normal;
+    
+}
+
+
+.THIS ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: -1px;
+}
+
+.THIS .uiInput uiInputSelect uiInput--default uiInput--select{
+    width:50%;
+}

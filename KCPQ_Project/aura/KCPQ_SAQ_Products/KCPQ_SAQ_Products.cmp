@@ -1,0 +1,138 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="KCPQ_SAQ_ProductsCtrl">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    <aura:attribute name="quoteId" type="String" default=""/>
+    <aura:attribute name="priceBookId" type="String" default=""/>
+    <aura:attribute name="products" type="List" />
+    <aura:attribute name="productTypes" type="List" />
+    <aura:attribute name="quoteSubmittedStatus" type="String" default=""/>
+    <aura:attribute name="isSubmitted" type="Boolean" default="false"/>
+    <aura:attribute name="isProductsLoaded" type="Boolean" default="false"/>
+    <aura:attribute name="startLoading" type="Boolean" />
+    <aura:attribute name="productGroupByField" type="String" />
+    <aura:attribute name="productWrapper" type="KCPQ_ProductGroupper[]" />
+    
+    <div>
+        <!--<aura:if isTrue="{!v.startLoading}" >
+            <c:KCPQ_LoadingFunctionalityComp />
+        </aura:if>-->
+        <aura:if isTrue="{!v.isProductsLoaded}">
+            <div class="slds-media">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle">Pick Your Product</h1>
+                </div>
+            </div>
+            <hr/>
+            
+            <aura:iteration items="{!v.productWrapper}" var="w">
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" 
+                        title="{!w.groupName}">{!w.groupName}</h1>
+                </div>
+                <div class="slds-card__body">
+                    <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                        <aura:iteration items="{!w.products}" var="product" indexVar="index">
+                            <!--<aura:if isTrue="{!!empty(product.Product_Image_New__c)}">-->
+                                <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-3">
+                                    <article class="slds-tile slds-media slds-card__tile slds-hint-parent">
+                                        <div class="slds-media__body">
+                                            <center>
+                                                <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                                    <h3 class="slds-truncate" title="{!product.Name}">
+                                                        <b>{!product.Name}</b>
+                                                    </h3>
+                                                </div>
+                                            </center>
+                                            <div class="slds-tile__detail slds-text-body_small">
+                                                <table >
+                                                    <tr>
+                                                        <td>
+                                                            <aura:unescapedHtml value="{!product.Product_Image_New__c}" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <!--<td style="padding-left: 55px;">
+                                                            
+                                                            <button class="btn btn-primary" id="{!product.Id}" type="button" onclick="{!c.addQuoteLineItems}">Build</button>
+                                                        </td>-->
+                                                        <td>
+                                                            <center>
+                                                            	<button class="btn btn-primary" id="{!product.Id}" type="button" onclick="{!c.addQuoteLineItems}">Build</button>
+                                                        	</center>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            
+                                            
+                                            
+                                        </div>
+                                        
+                                    </article>
+                                    
+                                </li>
+                            <!--</aura:if>-->
+                            
+                        </aura:iteration>
+                        
+                    </ul>
+                    <hr/>
+                </div>
+            </aura:iteration>
+            
+            <aura:iteration items="{!v.productTypes}" var="type">
+                
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="{!type}">{!type}</h1>
+                </div>     
+                
+                <div class="slds-card__body">
+                    <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                        <aura:iteration items="{!v.products}" var="product" indexVar="index">
+                            <aura:if isTrue="{!equals(type,if(empty($Label.c.KCPQ_Products_GroupBy_Field),null,product.$Label.c.KCPQ_Products_GroupBy_Field))}">
+                                <aura:if isTrue="{!!empty(product.Product_Image__c)}">
+                                    <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-3">
+                                        <article class="slds-tile slds-media slds-card__tile slds-hint-parent">
+                                            
+                                            
+                                            
+                                            
+                                            <div class="slds-media__body">
+                                                <center>
+                                                    <div class="slds-grid slds-grid_align-spread slds-has-flexi-truncate">
+                                                        <h3 class="slds-truncate" title="{!product.Name}">
+                                                            <b>{!product.Name}</b>
+                                                        </h3>
+                                                        
+                                                    </div>
+                                                </center>
+                                                <div class="slds-tile__detail slds-text-body_small">
+                                                    <dl class="slds-list_horizontal slds-wrap">
+                                                        
+                                                        <aura:unescapedHtml value="{!product.Product_Image__c}" />
+                                                        
+                                                    </dl>
+                                                </div>
+                                                <center>
+                                                    <button class="btn btn-primary" id="{!product.Id}" type="button" onclick="{!c.addQuoteLineItems}">Build</button>
+                                                </center> 
+                                            </div>
+                                            
+                                        </article>
+                                        
+                                    </li>
+                                </aura:if>
+                            </aura:if>
+                            
+                        </aura:iteration>
+                        
+                    </ul>
+                    <hr/>
+                </div>
+            </aura:iteration>
+            
+        </aura:if>
+    </div>
+</aura:component>

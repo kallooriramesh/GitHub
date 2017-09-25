@@ -1,0 +1,35 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="isPriceBookSeleted" type="Boolean" />
+    <aura:attribute name="pricebookPicklist" type="String" />
+    <aura:attribute name="pricebookPicklistVal" type="String" default="" />
+    <aura:attribute name="isSubmitted" type="Boolean" default="false"/>
+    <aura:attribute name="quote" type="KCPQ_QuoteWrapper" />
+    <aura:attribute name="products" type="List" default="{'sObjectType':'SBQQ__Quote__c'}"/>
+    <aura:attribute name="productGroupByField" type="String" default="Body_Style__c" />
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    
+    <div>
+        <aura:if isTrue="{!v.startLoading}" >
+            <c:KCPQ_LoadingFunctionalityComp />
+        </aura:if>
+        <aura:if isTrue="{!!v.isPriceBookSeleted}" >
+            <c:KCPQ_SAQ_PBSelection isPriceBookSeleted="{!v.isPriceBookSeleted}"
+                                    pricebookPicklist="{!v.pricebookPicklist}"
+                                    pricebookPicklistVal="{!v.pricebookPicklistVal}"
+                                    quote="{!v.quote}"
+                                    startLoading="{!v.startLoading}"/>
+        </aura:if>
+        <aura:if isTrue="{!v.isPriceBookSeleted}">
+            <aura:if isTrue="{!!v.isSubmitted}">
+                <c:KCPQ_SAQ_Products quoteId="{!v.quote.quoteId}" 
+                                     priceBookId="{!v.pricebookPicklistVal}" 
+                                     isSubmitted="{!v.isSubmitted}"
+                                     productGroupByField="{!v.productGroupByField}" 
+                                     startLoading="{!v.startLoading}"/>
+            </aura:if>
+        </aura:if>
+    </div>
+    <!-- <aura:if isTrue="{!v.isSubmitted}" >
+         Quote has been submitted successfully.
+    </aura:if>-->
+</aura:component>

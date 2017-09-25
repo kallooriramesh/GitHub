@@ -1,0 +1,88 @@
+<aura:component controller="KCPQ_ProductRecommendationCompCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="pricebookId" type="String" default="" />
+    <aura:attribute name="quoteProcessId" type="String" default="" />
+    <aura:attribute name="startLoading" type="Boolean" default="false" />
+    <aura:attribute name="tempProductObj" type="Product2" default="{Name: 'Dummy'}" />
+    <aura:attribute name="recommProduct" type="KCPQ_CustomObjectWrapper[]" />
+    <aura:attribute name="quoteId" type="String" default="" />
+    <aura:attribute name="isShowOurRecommendations" type="Boolean" default="false" />
+    <aura:attribute name="isSubmitted" type="Boolean" default="false" />
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    
+    <div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Guided Selling</h3>
+            </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Our Recommendations </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <aura:if isTrue="{!v.isShowOurRecommendations}">
+                            <aura:if isTrue="{!v.recommProduct.length == 0}" >
+                                <h2>No Products Found</h2>
+                                <br/>
+                                <center>
+                                    <button class="btn btn-primary" type="button" onclick="{!c.doBack}">Back</button>
+                                </center>
+                            </aura:if>
+                            <aura:if isTrue="{!v.recommProduct.length > 0}" >
+                                <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                                    
+                                    <!--START Product Table Header -->
+                                    <aura:iteration items="{!v.recommProduct}" var="wr" indexVar="i">
+                                        <aura:if isTrue="{!i == 0}" >
+                                            <aura:iteration items="{!wr.objectFields}" var="fld">
+                                                <li class="{! 'recommheaderMediaCSS slds-align_absolute-center slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-' + '' + (wr.fieldCount+1)}">
+                                                    <div class="slds-form-element">
+                                                        <aura:if isTrue="{!fld.fieldLabel == 'Product Image New'}">
+                                                        	<label class="slds-text-body--medium slds-text-title_caps recommheaderLabelCSS">PRODUCT IMAGE</label>
+                                                        </aura:if>
+                                                        <aura:if isTrue="{!fld.fieldLabel != 'Product Image New'}">
+                                                        	<label class="slds-text-body--medium slds-text-title_caps recommheaderLabelCSS">{!fld.fieldLabel}</label>
+                                                        </aura:if>
+                                                    </div>
+                                                </li>
+                                            </aura:iteration>
+                                            <li class="{! 'recommheaderMediaCSS slds-align_absolute-center slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-' + '' + (wr.fieldCount+1)}">
+                                                <div class="slds-form-element">
+                                                    <label class="slds-text-body--medium slds-text-title_caps recommheaderLabelCSS">Action</label>
+                                                </div>
+                                            </li>
+                                            <div class="ln_solidHeader recommheaderMediaCSS"></div>
+                                        </aura:if>
+                                    </aura:iteration>
+                                    <!--END Product Table Header -->
+                                    
+                                    <aura:iteration items="{!v.recommProduct}" var="wr" >
+                                        <aura:iteration items="{!wr.objectFields}" var="fld" >
+                                            <li class="{! 'slds-align_absolute-center slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-' + '' + (wr.fieldCount+1)}">
+                                                <div class="slds-form-element">
+                                                    <aura:unescapedHtml value="{!fld.fieldValue}" />
+                                                </div>
+                                            </li>
+                                        </aura:iteration>
+                                        <li class="{! 'slds-align_absolute-center slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-' + '' + (wr.fieldCount+1)}">
+                                            <a href="" data-index="{!wr.recordId}" onclick="{!c.doBuild}" class="btn btn-primary">Build</a>
+                                        </li>
+                                        <div class="ln_solid"></div>
+                                    </aura:iteration>
+                                </ul>
+                            </aura:if>
+                        </aura:if>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

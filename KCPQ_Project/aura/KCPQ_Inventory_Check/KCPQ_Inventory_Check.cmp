@@ -1,0 +1,143 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="KCPQ_Inventory_CheckCtrl">
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    
+    <aura:attribute name="products" type="KCPQ_InventoryWrapper[]"/>
+    <aura:attribute name="allProducts" type="KCPQ_InventoryWrapper[]"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    
+    
+    <aura:attribute name="displayLimit" type="Integer" default="{!$Label.c.KCPQ_Inventory_Display_Limit}"/>
+    <aura:attribute name="totalRecordsCount" type="Integer"/>
+    <aura:attribute name="startCount" type="Integer" default="1"/>
+    <aura:attribute name="endCount" type="Integer" />
+    <aura:attribute name="selectedPageNumber" type="Integer" default="1"/>
+    <aura:attribute name="totalPages" type="Integer" default="1"/>
+    
+    <!--ERROR Parameters-->
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    <!-- ERROR Parameters END-->
+    
+    <aura:attribute name="lastStyle" type="String" default=""/>
+    <aura:attribute name="firstStyle" type="String" default="pointer-events:none;opacity:0.5;"/>
+    
+    <!-- <aura:if isTrue="{!v.startLoading}" >
+        <c:KCPQ_LoadingFunctionalityComp />
+    </aura:if>-->
+    
+    <aura:if isTrue="{!and(v.messageTitle != '', v.messageText != '')}" >
+        <c:KCPQ_DisplayToastMessage messageTitle="{!v.messageTitle}"
+                                    messageText="{!v.messageText}"/>
+    </aura:if>
+    <div class="scroll" >
+        <aura:iteration items="{!v.products}" var="p">
+            <!--<aura:if isTrue="{!!empty(p.product.Product_Image__c)}">-->
+            <div style=" border: 1px solid #a1a1a1;border-radius: 25px;padding-left: 30px;">
+               
+                <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded slds-align_absolute-center">
+                    <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_2-of-6">
+                        <h1 class="slds-page-header__title slds-m-right_small slds-align-middle" 
+                            title="{!p.product.Name}">{!p.product.Name}
+                        </h1><br/>
+                        <aura:unescapedHtml value="{!p.product.Product_Image__c}" />
+                    </li>
+                    <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_2-of-6" style="align-items: center;margin: auto;">
+                        <span class="slds-page-header__title slds-m-right_small slds-align-middle ">
+                            Exterior/Interior Shade
+                        </span><br/>
+                        <span style="{!'background-color:'+p.exteriorColorCode+';border: 2px solid #a1a1a1;padding: 1px 15px;text-align: center;'}">
+                            
+                        </span>
+                        <span style="{!'background-color:'+p.interiorColorCode+';border: 2px solid #a1a1a1;padding: 1px 15px; width: 5px;text-align: center;'}">
+                            
+                        </span>
+                    </li>
+                    <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-6" style="align-items: center;margin: auto;">
+                        <span class="slds-page-header__title slds-m-right_small slds-align-middle ">
+                            Stock Available
+                        </span><br/>
+                        <span class="slds-page-header__title slds-m-right_small slds-align-middle ">
+                            {!if(empty(p.stockAvailable),'0',p.stockAvailable)}
+                        </span><br/>
+                    </li>
+                    <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-6 slds-align_absolute-center">
+                        <aura:if isTrue="{!!empty(p.stockAvailable)}">
+                            <button class="btn btn-primary" id="{!p.product.Id}" type="button" 
+                                    onclick="{!c.createQuote}">Build</button>
+                        </aura:if>
+                    </li>
+                </ul>
+                
+                <!--<table>
+                    <tr>
+                        <td>
+                            <aura:unescapedHtml value="{!p.product.Product_Image__c}" />
+                        </td>
+                        <td style="text-align:center;">
+                            
+                            <span class="slds-page-header__title slds-m-right_small slds-align-middle ">
+                                Exterior/Interior Shade
+                            </span><br/>
+                            <span style="{!'background-color:'+p.exteriorColorCode+';border: 2px solid #a1a1a1;padding: 1px 15px;text-align: center;'}">
+                                
+                            </span>
+                            <span style="{!'background-color:'+p.interiorColorCode+';border: 2px solid #a1a1a1;padding: 1px 15px; width: 5px;text-align: center;'}">
+                                
+                                
+                            </span>
+                            
+                        </td>
+                        <td style="text-align:center;">
+                            <span class="slds-page-header__title slds-m-right_small slds-align-middle ">
+                                Stock Available
+                            </span><br/>
+                            <span class="slds-page-header__title slds-m-right_small slds-align-middle ">
+                                {!if(empty(p.stockAvailable),'0',p.stockAvailable)}
+                            </span><br/>
+                        </td>
+                        
+                        <td style="text-align:center;width:25%;">
+                            <aura:if isTrue="{!!empty(p.stockAvailable)}">
+                                <button class="btn btn-primary" id="{!p.product.Id}" type="button" 
+                                        onclick="{!c.createQuote}">Build</button>
+                            </aura:if>
+                        </td>
+                    </tr>
+                </table>-->
+                
+            </div>
+            <!--</aura:if>-->
+        </aura:iteration>
+        <table>
+            <tr>
+                <td style="text-align: left;">
+                    Showing {!v.startCount} to {!v.endCount} of {!v.totalRecordsCount} entries
+                </td>
+                <td style="text-align: right;">
+                    <ul class="pagination" style="margin-left: -1px;">
+                        
+                        <li style="{!v.firstStyle}">
+                            <a onclick="{!c.nextPage}" id='firstpage'>First</a>
+                        </li>
+                        
+                        <li style="{!v.firstStyle}">
+                            <a onclick="{!c.nextPage}" id='previouspage'>Prev</a>
+                        </li>
+                        
+                        <li style="{!v.lastStyle}">
+                            <a onclick="{!c.nextPage}" id='nextpage'>Next</a>
+                        </li>
+                        
+                        <li style="{!v.lastStyle}">
+                            <a onclick="{!c.nextPage}" id='lastpage'>Last</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</aura:component>

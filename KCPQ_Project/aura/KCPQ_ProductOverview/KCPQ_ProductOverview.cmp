@@ -1,0 +1,57 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:attribute name="startLoading" type="Boolean" />
+    <aura:attribute name="colorNames" type="String[]"/>
+    <aura:attribute name="mainProduct" type="Product2" default="{ 'sobjectType': 'Product2' }"/>
+    <aura:attribute name="currencySymbol" type="String" />	
+    <aura:attribute name="mainProductPrice" type="Decimal" />
+    <aura:attribute name="CommunityURLFor360View" type="String" default="{!$Label.c.KCPQ_CommunityURLFor360View}" />
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    
+    <ltng:require styles="{!$Resource.KCPQ_ProductPreview_custom_edit+'/custom_edit.css'}" />	
+   	
+    <ltng:require scripts="{!join(',',
+                           $Resource.KCPQ_ProductPreview_jquery + '/jquery.js',
+                           $Resource.KCPQ_ProductPreview_jquery + '/jquery.min.js')}" afterScriptsLoaded="{!c.doProductPreview}"/>
+    
+    <div>
+        <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+            <li class="slds-text-align_center slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-5">
+                <label class="slds-text-body--medium">Build Your</label><br/>
+                <label class="slds-text-body--medium">{!v.mainProduct.Name}</label>
+            </li>
+            <li class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_3-of-5">
+                <!--<aura:unescapedHtml value="{!v.mainProduct.Product_Image__c}" />-->
+                <aura:if isTrue="{!v.mainProduct.is360ProductViewEnabled__c == false || v.colorNames == null || v.colorNames.length == 0}">
+                    <div class="mainProductImageCSS">
+                    	<aura:unescapedHtml value="{!v.mainProduct.Product_Image__c}" />
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!v.mainProduct.is360ProductViewEnabled__c == true &amp;&amp; v.colorNames.length > 0}">
+                    <div style="display:block;">
+                        <div class="previewContainer">
+                            <div class="productPreview"></div>
+                        </div>
+                        <aura:iteration items="{!v.colorNames}" var="color">
+                            <div class="{! 'colorButton' + color + ' ' + 'productTypeButton'}" data-folder="{! 'car_' + color}"></div>
+                        </aura:iteration>
+                        <!--<div class="colorButtonRed productTypeButton" data-folder="car_red"></div>
+                    <div class="colorButtonBlack productTypeButton" data-folder="car_black"></div>
+                    <div class="colorButtonBlue productTypeButton" data-folder="car_blue"></div>-->
+                    </div>
+                    <!-- /page content -->
+                    
+                    <!-- /footer content -->
+                    <div class="bufferContainer"></div>
+                </aura:if>
+            </li>
+            <li class="slds-text-align_center slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_1-of-5">
+                <label class="slds-text-body--medium">Starting at</label><br/>
+                <!--<label class="slds-text-body- -medium">{!v.currencySymbol}{!v.mainProductPrice}</label>-->
+                <ui:outputCurrency class="slds-text-body--medium mainProductPriceCSS" value="{!v.mainProductPrice}" />
+            </li>
+        </ul>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,48 @@
+<aura:component controller="KCPQ_QuickLinksCompCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false"/>
+    <aura:attribute name="QuickLinkWrapper" type="KCPQ_QuickLinksWrapperCtrl[]"/>
+    <!--<aura:attribute name="pathprefixURL" type="String"/>-->
+    
+    <div>
+        <div class="x_panel quickLinkPanelCSS">
+            <aura:if isTrue="{!v.startLoading}" >
+                <c:KCPQ_LoadingFunctionalityComp />
+            </aura:if>
+            <div class="x_title">
+                <h2>Quick Links<small></small></h2>
+                <!--<ul class="nav navbar-right panel_toolbox">
+             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>-->
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="quickLinksContentBlockCSS">
+                    <ul class="list-unstyled">
+                        <aura:iteration items="{!v.QuickLinkWrapper}" var="qLink" > 
+                            <li class="media event">
+                                <div class="media-body">
+                                    <!--<a class="title" href="{! v.pathprefixURL + qLink.QuickLink.Link__c}">
+                                        {!qLink.QuickLink.Name}
+                                    </a>-->
+                                    <a class="title" href="{!qLink.QuickLink.Link__c}" target="_blank">
+                                        {!qLink.QuickLink.Name}
+                                    </a>
+                                    <aura:if isTrue="{!qLink.QuickLink.Labels__c == 'New'}">
+                                        <span class="newFlag">New!</span>
+                                    </aura:if>
+                                    <aura:if isTrue="{!qLink.QuickLink.Labels__c == 'Updated'}">
+                                        <span class="label label-success">Updated</span>
+                                    </aura:if>
+                                    <p> {!qLink.QuickLink.Description__c} </p>
+                                </div>
+                            </li>
+                        </aura:iteration>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

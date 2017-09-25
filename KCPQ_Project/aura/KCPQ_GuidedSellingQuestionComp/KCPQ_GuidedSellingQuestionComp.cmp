@@ -1,0 +1,51 @@
+<aura:component controller="KCPQ_GuidedSellingQuestionCompCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="startLoading" type="Boolean" default="false" />
+    <aura:attribute name="quoteProcessId" type="String" default="" />
+    <aura:attribute name="pricebookId" type="String" default="" />
+    <aura:attribute name="ProcessInputWrapper" type="KCPQ_ProcessInputWrapperCtrl[]" />
+    <aura:attribute name="tempProductObj" type="Product2" default="{Name: 'Dummy'}" />
+    <aura:attribute name="fieldSetFields" type="KCPQ_FieldSetMember[]" />
+    <aura:attribute name="pathprefixURL" type="String"/>
+    <aura:attribute name="isSubmitted" type="Boolean" default="false" />
+    <aura:attribute name="isInitialized" type="Boolean" default="false" />
+    <aura:attribute name="messageTitle" type="String" default='' />
+    <aura:attribute name="messageText" type="String" default='' />
+    
+    <div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Guided Selling</h3>
+            </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Questions </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <ul class="slds-card__body_inner slds-grid slds-wrap slds-grid_pull-padded">
+                            <aura:if isTrue="{!v.isInitialized}" >
+                                <c:KCPQ_FieldSetForm sObjApiName="Product2" 
+                                                     startLoading="{!v.startLoading}"
+                                                     record="{!v.tempProductObj}" 
+                                                     fields="{!v.fieldSetFields}"/>
+                            </aura:if>
+                        </ul>
+                        <br/>
+                        <div class="ln_solid"></div>
+                        <center>
+                            <a href="{!v.pathprefixURL + '/'}" class="btn btn-primary">Home</a>
+                            <button class="btn btn-success" type="button" onclick="{!c.doSubmitQuestion}">Submit</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

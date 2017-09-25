@@ -1,0 +1,118 @@
+.THIS .nav-sm .profile_pic{
+	width: 100% !important;
+    float: left !important;
+    margin-left: 0% !important;
+}
+
+.THIS .nav-sm .companyPicCSS{
+    margin-left: 0%;
+    width: 85%;
+}
+
+.THIS .site_title{
+    height: 75px;
+}
+
+.THIS .companyPicCSS{
+    width: 70%;
+    margin-left: 15%;
+    z-index: 1000;
+    position: inherit;
+}
+
+@media (max-width: 991px){
+    .THIS .nav-md .container.body .col-md-3.left_col {
+        display: none;
+    }
+    
+    .THIS .nav-md .container.body .top_nav {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 991px){
+    .THIS .nav-sm .container.body .col-md-3.left_col {
+        display: block;
+    }
+    
+    .THIS .nav-sm .main_container .top_nav {
+        display: block;
+        margin-left: 70px;
+        z-index: 2;
+    }
+    
+    .THIS .nav-sm .main_container .top_nav {
+    	/*padding-left: 70px;*/
+    }
+}
+
+.THIS .nav-sm .container.body .col-md-3.left_col {
+    min-height: 100%;
+    width: 70px;
+    padding: 0;
+    z-index: 9999;
+    position: absolute;
+}
+
+.THIS .nav-sm .container.body .right_col {
+    padding: 10px 20px;
+    margin-left: 70px;
+    z-index: 2;
+}
+
+.THIS .nav_menu {
+	border-bottom: 0 !important;
+    width: 5% !important;
+    background: rgb(255, 255, 255) !important;
+}
+
+.THIS .toggle {
+    padding-top: 12px !important;
+    padding-bottom: 10px !important;
+}
+
+.THIS .toggle a i {
+    font-size: 35px;
+}
+
+.THIS #nprogress {
+    /*display: none !important;*/
+}
+
+.THIS .menu_section {
+    margin-bottom: 1000px !important;
+}
+
+.THIS .nav-sm ul.nav.child_menu li{
+    padding-left: 36px;
+}
+
+.THIS .sidebar-footer a {
+    width: 100% !important;
+}
+
+.THIS .slds-spinner_container {
+	z-index: 9000;
+  	position: fixed;
+}
+
+/*.THIS .menu_section>ul {
+	overflow-y: auto !important;
+    max-height: 31rem;
+}
+
+.THIS .side-menu::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #2A3F54 !important;
+    width: 1px;
+}
+
+.THIS .side-menu::-webkit-scrollbar{
+	width: 1px;
+	background-color: #2A3F54 !important;
+}
+
+.THIS .side-menu::-webkit-scrollbar-thumb{
+	background: #2A3F54 !important;
+}*/

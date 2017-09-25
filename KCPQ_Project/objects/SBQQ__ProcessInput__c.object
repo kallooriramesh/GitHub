@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <fields>
+        <fullName>Accessory__c</fullName>
+        <externalId>false</externalId>
+        <label>Accessory</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Type_of_Accessory__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>DVD Systems</fullName>
+                    <default>false</default>
+                    <label>DVD Systems</label>
+                </value>
+                <value>
+                    <fullName>Keyless Entry</fullName>
+                    <default>false</default>
+                    <label>Keyless Entry</label>
+                </value>
+                <value>
+                    <fullName>Lamps, Lights and Treatments</fullName>
+                    <default>false</default>
+                    <label>Lamps, Lights and Treatments</label>
+                </value>
+                <value>
+                    <fullName>Parking Assit System</fullName>
+                    <default>false</default>
+                    <label>Parking Assit System</label>
+                </value>
+                <value>
+                    <fullName>Remote Start</fullName>
+                    <default>false</default>
+                    <label>Remote Start</label>
+                </value>
+                <value>
+                    <fullName>Vehicle Security</fullName>
+                    <default>false</default>
+                    <label>Vehicle Security</label>
+                </value>
+                <value>
+                    <fullName>Covers and Protectors</fullName>
+                    <default>false</default>
+                    <label>Covers and Protectors</label>
+                </value>
+                <value>
+                    <fullName>Deflectors</fullName>
+                    <default>false</default>
+                    <label>Deflectors</label>
+                </value>
+                <value>
+                    <fullName>Fuel</fullName>
+                    <default>false</default>
+                    <label>Fuel</label>
+                </value>
+                <value>
+                    <fullName>Graphics, Stripes and Trim Kits</fullName>
+                    <default>false</default>
+                    <label>Graphics, Stripes and Trim Kits</label>
+                </value>
+                <value>
+                    <fullName>Racks and Carriers</fullName>
+                    <default>false</default>
+                    <label>Racks and Carriers</label>
+                </value>
+                <value>
+                    <fullName>Splash Guards</fullName>
+                    <default>false</default>
+                    <label>Splash Guards</label>
+                </value>
+                <value>
+                    <fullName>Spoilers</fullName>
+                    <default>false</default>
+                    <label>Spoilers</label>
+                </value>
+                <value>
+                    <fullName>Ash or Coin Cup</fullName>
+                    <default>false</default>
+                    <label>Ash or Coin Cup</label>
+                </value>
+                <value>
+                    <fullName>Cargo Organization</fullName>
+                    <default>false</default>
+                    <label>Cargo Organization</label>
+                </value>
+                <value>
+                    <fullName>Door Spill Plates</fullName>
+                    <default>false</default>
+                    <label>Door Spill Plates</label>
+                </value>
+                <value>
+                    <fullName>Floor Mats</fullName>
+                    <default>false</default>
+                    <label>Floor Mats</label>
+                </value>
+                <value>
+                    <fullName>Gear Shift Knobs</fullName>
+                    <default>false</default>
+                    <label>Gear Shift Knobs</label>
+                </value>
+                <value>
+                    <fullName>Locks</fullName>
+                    <default>false</default>
+                    <label>Locks</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Electronics</controllingFieldValue>
+                <valueName>DVD Systems</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Electronics</controllingFieldValue>
+                <valueName>Keyless Entry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Electronics</controllingFieldValue>
+                <valueName>Lamps, Lights and Treatments</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Electronics</controllingFieldValue>
+                <valueName>Parking Assit System</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Electronics</controllingFieldValue>
+                <valueName>Remote Start</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Electronics</controllingFieldValue>
+                <valueName>Vehicle Security</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Exterior</controllingFieldValue>
+                <valueName>Covers and Protectors</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Exterior</controllingFieldValue>
+                <valueName>Deflectors</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Exterior</controllingFieldValue>
+                <valueName>Fuel</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Exterior</controllingFieldValue>
+                <valueName>Graphics, Stripes and Trim Kits</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Exterior</controllingFieldValue>
+                <valueName>Racks and Carriers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Exterior</controllingFieldValue>
+                <valueName>Splash Guards</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Exterior</controllingFieldValue>
+                <valueName>Spoilers</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Interior</controllingFieldValue>
+                <valueName>Ash or Coin Cup</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Interior</controllingFieldValue>
+                <valueName>Cargo Organization</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Interior</controllingFieldValue>
+                <valueName>Door Spill Plates</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Interior</controllingFieldValue>
+                <valueName>Floor Mats</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Interior</controllingFieldValue>
+                <valueName>Gear Shift Knobs</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Wheels</controllingFieldValue>
+                <valueName>Locks</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Body_Style__c</fullName>
+        <externalId>false</externalId>
+        <label>Body Style</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sedan</fullName>
+                    <default>false</default>
+                    <label>Sedan</label>
+                </value>
+                <value>
+                    <fullName>Hatchback</fullName>
+                    <default>false</default>
+                    <label>Hatchback</label>
+                </value>
+                <value>
+                    <fullName>Convertible</fullName>
+                    <default>false</default>
+                    <label>Convertible</label>
+                </value>
+                <value>
+                    <fullName>SUV &amp; Crossover</fullName>
+                    <default>false</default>
+                    <label>SUV &amp; Crossover</label>
+                </value>
+                <value>
+                    <fullName>Truck &amp; Van</fullName>
+                    <default>false</default>
+                    <label>Truck &amp; Van</label>
+                </value>
+                <value>
+                    <fullName>Hybrids &amp; EVs</fullName>
+                    <default>false</default>
+                    <label>Hybrids &amp; EVs</label>
+                </value>
+                <value>
+                    <fullName>Commercial trucks</fullName>
+                    <default>false</default>
+                    <label>Commercial trucks</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MPG__c</fullName>
+        <externalId>false</externalId>
+        <label>MPG</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>At Least 20 MPG</fullName>
+                    <default>false</default>
+                    <label>At Least 20 MPG</label>
+                </value>
+                <value>
+                    <fullName>At Least 30 MPG</fullName>
+                    <default>false</default>
+                    <label>At Least 30 MPG</label>
+                </value>
+                <value>
+                    <fullName>At Least 40 MPG</fullName>
+                    <default>false</default>
+                    <label>At Least 40 MPG</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Market__c</fullName>
+        <externalId>false</externalId>
+        <label>Market</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Personal Vehicles</fullName>
+                    <default>false</default>
+                    <label>Personal Vehicles</label>
+                </value>
+                <value>
+                    <fullName>Commercial Vehicles</fullName>
+                    <default>false</default>
+                    <label>Commercial Vehicles</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Model_Year__c</fullName>
+        <externalId>false</externalId>
+        <label>Model Year</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Current</fullName>
+                    <default>false</default>
+                    <label>Current</label>
+                </value>
+                <value>
+                    <fullName>Previous</fullName>
+                    <default>false</default>
+                    <label>Previous</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Power_Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Power Source</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Gas</fullName>
+                    <default>false</default>
+                    <label>Gas</label>
+                </value>
+                <value>
+                    <fullName>EcoBoost</fullName>
+                    <default>false</default>
+                    <label>EcoBoost</label>
+                </value>
+                <value>
+                    <fullName>Hybrid</fullName>
+                    <default>false</default>
+                    <label>Hybrid</label>
+                </value>
+                <value>
+                    <fullName>Plug-In Hybrid</fullName>
+                    <default>false</default>
+                    <label>Plug-In Hybrid</label>
+                </value>
+                <value>
+                    <fullName>Electric</fullName>
+                    <default>false</default>
+                    <label>Electric</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Seating__c</fullName>
+        <externalId>false</externalId>
+        <label>Seating</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>At Least 4 Passengers</fullName>
+                    <default>false</default>
+                    <label>At Least 4 Passengers</label>
+                </value>
+                <value>
+                    <fullName>At Least 7 Passengers</fullName>
+                    <default>false</default>
+                    <label>At Least 7 Passengers</label>
+                </value>
+                <value>
+                    <fullName>At Least 10 Passengers</fullName>
+                    <default>false</default>
+                    <label>At Least 10 Passengers</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type_of_Accessory__c</fullName>
+        <externalId>false</externalId>
+        <label>Type of Accessory</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Electronics</fullName>
+                    <default>false</default>
+                    <label>Electronics</label>
+                </value>
+                <value>
+                    <fullName>Exterior</fullName>
+                    <default>false</default>
+                    <label>Exterior</label>
+                </value>
+                <value>
+                    <fullName>Interior</fullName>
+                    <default>false</default>
+                    <label>Interior</label>
+                </value>
+                <value>
+                    <fullName>Wheels</fullName>
+                    <default>false</default>
+                    <label>Wheels</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>
